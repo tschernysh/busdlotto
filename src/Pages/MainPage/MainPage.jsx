@@ -1,6 +1,8 @@
 import { MainChance } from "./MainChance/MainChance"
+import { MainFaq } from "./MainFaq/MainFaq"
 import { MainReferral } from "./MainReferral/MainReferral"
 import { MainTitle } from "./MainTitle/MainTitle"
+import { MainWhy } from "./MainWhy/MainWhy"
 import { MainWinning } from "./MainWinning/MainWinning"
 
 export const MainPage = () => {
@@ -11,6 +13,8 @@ export const MainPage = () => {
       <MainReferral />
       <MainWinning />
       <MainChance />
+      <MainWhy />
+      <MainFaq />
     </div>
   )
 }

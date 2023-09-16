@@ -6,7 +6,7 @@ import { ReactComponent as Youtube } from 'Assets/socialMedia/youtube.svg'
 export const Footer = () => {
 
   return (
-    <footer className='bg-prussian py-8'>
+    <footer className='bg-prussian py-8 mt-20'>
       <div className='flex items-center mx-auto justify-between max-w-screen-mmx'>
         <div className='flex items-center gap-x-8'>
           <a href='https://instagram.com' target='_blank' className=''>
