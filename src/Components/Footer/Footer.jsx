@@ -7,7 +7,7 @@ export const Footer = () => {
 
   return (
     <footer className='bg-prussian py-8 mt-20'>
-      <div className='flex items-center mx-auto justify-between max-w-screen-mmx'>
+      <div className='flex flex-col sm:flex-row gap-y-8 items-center mx-auto justify-between max-w-screen-mmx'>
         <div className='flex items-center gap-x-8'>
           <a href='https://instagram.com' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
@@ -36,7 +36,7 @@ export const Footer = () => {
           </a>
         </div>
         <a
-          className='text-description text-3xl font-poppins400'
+          className='text-description text-2xl sm:text-3xl font-poppins400'
           href='https://support@chainlotto.io'
           target='_blank'>support@chainlotto.io</a>
       </div>

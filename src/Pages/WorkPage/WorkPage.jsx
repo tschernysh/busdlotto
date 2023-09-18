@@ -6,7 +6,7 @@ import { WorkTitle } from "./WorkTitle/WorkTitle"
 export const WorkPage = () => {
 
   return (
-    <div className=''>
+    <div className='work__background'>
       <WorkTitle />
       <WorkLore />
       <WorkMath />

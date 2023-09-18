@@ -7,8 +7,8 @@ export const ConnectWallet = (props) => {
     : 'font-inter600 text-title text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-24'
 
   return (
-    <button className={styles}>
+    <button className={`${styles} ${props.className}`}>
       Connect Wallet
-    </button>
+    </button >
   )
 }

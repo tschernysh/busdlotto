@@ -6,7 +6,7 @@ import { ReferralTitle } from "./ReferralTitle/ReferralTitle"
 export const ReferralPage = () => {
 
   return (
-    <div className='referral__background '>
+    <div className='referral__background'>
       <ReferralTitle />
       <ReferralBenefits />
       <ReferralBonuses />

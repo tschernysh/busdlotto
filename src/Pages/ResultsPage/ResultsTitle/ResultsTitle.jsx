@@ -3,7 +3,7 @@ import Crown from 'Assets/results/crown.png'
 export const ResultsTitle = () => {
 
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto text-center'>
+    <div className='pt-20 max-w-screen-mmx mx-auto text-center'>
       <h1 className='font-inter800 text-7xl mb-24 text-white w-5/12 mx-auto'>
         Check your results
       </h1>

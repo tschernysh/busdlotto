@@ -5,7 +5,7 @@ import { ResultsBlock } from "./ResutlsBlock/ResultsBlock"
 export const ResultsPage = () => {
 
   return (
-    <div>
+    <div className='result__background'>
       <ResultsTitle />
       <ResultsBlock />
     </div>

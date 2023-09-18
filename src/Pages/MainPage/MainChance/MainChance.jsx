@@ -1,17 +1,31 @@
 import TicketLogo from 'Assets/ticketLogo.png'
 import { ConnectWallet } from 'Components/ConnectWallet/ConnectWallet'
+import { Carousel } from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+const carouselOptions = {
+  autoPlay: false,
+  showArrows: true,
+  swipeable: true,
+  emulateTouch: true,
+  infiniteLoop: true,
+  showThumbs: false,
+  showStatus: false,
+  selectedItem: 1,
+  centerSlidePercentage: 100,
+}
 
 export const MainChance = () => {
 
   return (
-    <div className='max-w-screen-mmx mx-auto after__block_line mt-20'>
+    <div className='mx-auto after__block_line mt-20'>
       <h1 className='text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
-      <div className='flex items-center mb-8'>
+      <Carousel className='landing__main__carousel' {...carouselOptions}>
         <Ticket />
         <Ticket />
         <Ticket />
-      </div>
-      <div className='w-full text-center '>
+      </Carousel>
+      <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
         <ConnectWallet />
       </div>
