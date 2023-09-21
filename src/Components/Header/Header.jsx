@@ -5,6 +5,7 @@ import Logo from 'Assets/Logo.png'
 import Burger from 'Assets/burger.png'
 
 export const Header = () => {
+
   return (
     <header className='sm:bg-prussian py-8'>
       <div className='gap-x-24 px-4 mx-auto justify-between max-w-screen-mmx flex'>

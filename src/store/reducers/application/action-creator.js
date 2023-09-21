@@ -1,13 +1,10 @@
 import { store } from 'store';
 import { Navigate } from 'react-router-dom';
 import applicationTypes from './types'
-import StakeContract from 'contracts/StakeContract.json'
-import IERC20 from 'contracts/IERC20.json'
 import Web3 from 'web3';
-import Config from 'config';
 import { initWeb3 } from 'utils/initWeb3';
 import applicationReducer from '.';
-import { routerBook } from 'routes/routerBook';
+import { Config } from 'config';
 
 export const ApplicationActionCreator = {
   setWalletAddress: (walletAddress) => ({
@@ -63,7 +60,7 @@ export const ApplicationActionCreator = {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = new Web3(Config().WEB3_BSC_URL);
 
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const stakeContract = new web3.eth.Contract(Config().STAKE_CONTRACT_ADDRESS);
 
       let defaultReferrer
 
@@ -105,7 +102,7 @@ export const ApplicationActionCreator = {
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
 
-      const tokenContract = new web3.eth.Contract(IERC20.abi, Config().TOKEN_CONTRACT_ADDRESS)
+      const tokenContract = new web3.eth.Contract('tokenAbi', Config().TOKEN_CONTRACT_ADDRESS)
 
 
       let tokenBalance
@@ -198,7 +195,6 @@ export const ApplicationActionCreator = {
           currentAddress = accounts.result[0]
           console.log('Wallet connected:', currentAddress)
           dispatch(ApplicationActionCreator.setWalletAddress(currentAddress))
-          dispatch(ApplicationActionCreator.setRedirectTo(routerBook.dashboard))
         } catch (error) {
           console.error('Error connecting wallet:', error);
         }
@@ -235,12 +231,7 @@ export const ApplicationActionCreator = {
       const currentAddress = walletRPC.account.address
       console.log('Wallet connected:', currentAddress)
       dispatch(ApplicationActionCreator.setWalletAddress(currentAddress))
-      dispatch(ApplicationActionCreator.setRedirectTo(routerBook.dashboard))
 
-    },
-  disconnectMetamaskWallet:
-    () => async (dispatch, store) => {
-      dispatch(ApplicationActionCreator.setRedirectTo(routerBook.main))
     },
   withdraw:
     () => async (dispatch, store) => {
@@ -248,7 +239,7 @@ export const ApplicationActionCreator = {
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
       dispatch(ApplicationActionCreator.setIsWithdrawTransaction(true))
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const stakeContract = new web3.eth.Contract();
 
       let withdraw
       dispatch(ApplicationActionCreator.setToastData({
@@ -312,8 +303,8 @@ export const ApplicationActionCreator = {
 
       dispatch(ApplicationActionCreator.setIsDepositTransaction(true))
 
-      const tokenContract = new web3.eth.Contract(IERC20.abi, Config().TOKEN_CONTRACT_ADDRESS)
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const tokenContract = new web3.eth.Contract('tokkenabi', Config().TOKEN_CONTRACT_ADDRESS)
+      const stakeContract = new web3.eth.Contract();
 
       let currentReferral
       const localReferral = localStorage.getItem("refAddress");

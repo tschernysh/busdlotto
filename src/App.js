@@ -5,16 +5,17 @@ import { Header } from 'Components/Header/Header';
 import { Footer } from 'Components/Footer/Footer';
 import { ApplicationRoutes } from 'Routes/ApplicationRoutes';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { initWagmi } from 'utils/initWagmi';
 import { WagmiConfig } from 'wagmi';
 import { ApplicationActionCreator } from 'store/reducers/application/action-creator';
+import { Config } from 'config';
 
 function App() {
   const dispatch = useDispatch()
   const {
     walletAddress, isNeedUpdate, notCorrectChain
-  } = useSelector(state => state.ApplicationReducer)
+  } = useSelector(state => state.applicationReducer)
   const [seconds, setSeconds] = useState(0)
   const [wagmiConfig, setWagmiConfig] = useState()
   const [ethereumClient, setEthereumClient] = useState()
@@ -28,6 +29,7 @@ function App() {
     setProjectId(projectId)
   }, [])
 
+  /*
   useEffect(() => {
     let interval
     interval = setInterval(() => {
@@ -37,14 +39,14 @@ function App() {
         if (!!walletAddress) {
         }
         setSeconds(1);
-      } else if (seconds > config().HEARTBEAT_RATE) {
+      } else if (seconds > Config().HEARTBEAT_RATE) {
         setSeconds(0)
       } else setSeconds(seconds + 1)
     }, 1000)
 
     return () => clearInterval(interval);
   }, [seconds])
-
+*/
   useEffect(() => {
     if (isNeedUpdate) {
       if (!!walletAddress) {
@@ -70,7 +72,7 @@ function App() {
     const handleChainChanged = (chainId) => {
       const newChainId = Number(chainId)
 
-      if (chainId !== config().CHAIN_ID) {
+      if (chainId !== Config().CHAIN_ID) {
         dispatch(ApplicationActionCreator.setNotCorrectChain(false))
       } else dispatch(ApplicationActionCreator.setNotCorrectChain(true))
     }

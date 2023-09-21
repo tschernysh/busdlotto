@@ -1,10 +1,9 @@
 import Web3 from "web3";
 import accountTypes from "./types";
-import StakeContract from 'contracts/StakeContract.json'
-import Config from "config";
 import accountReducer from ".";
 import { ApplicationActionCreator } from "../application/action-creator";
 import { initWeb3 } from "utils/initWeb3";
+import { Config } from "config";
 
 export const AccountActionCreator = {
   setLeaderPersonalInfo: (personalInfo) => ({
@@ -40,7 +39,7 @@ export const AccountActionCreator = {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = await initWeb3(walletRPC)
 
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const stakeContract = new web3.eth.Contract('contractAbi', Config().STAKE_CONTRACT_ADDRESS);
 
       let contractInfo
 
@@ -91,7 +90,7 @@ export const AccountActionCreator = {
 
       const web3 = await initWeb3(walletRPC)
 
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const stakeContract = new web3.eth.Contract('contractAbi', Config().STAKE_CONTRACT_ADDRESS);
 
       let userInfo
 
@@ -218,7 +217,7 @@ export const AccountActionCreator = {
 
       const web3 = await initWeb3(walletRPC)
 
-      const stakeContract = new web3.eth.Contract(StakeContract.abi, Config().STAKE_CONTRACT_ADDRESS);
+      const stakeContract = new web3.eth.Contract('contractAbi', Config().STAKE_CONTRACT_ADDRESS);
 
       let turnover = []
 

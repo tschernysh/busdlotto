@@ -11,7 +11,7 @@ import { useEffect } from "react"
 import { Web3Modal } from "@web3modal/react"
 
 
-export const ApplicationRoutes = () => {
+export const ApplicationRoutes = (props) => {
 
   const { connector: activeConnector, address, isConnecting, isDisconnected } = useAccount()
   const { data, isError } = useWalletClient()

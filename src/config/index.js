@@ -1,0 +1,28 @@
+
+export const Config = () => {
+  if (process.env.REACT_APP_ENV === 'production') {
+    return {
+      DEPLOY_URL_PREFIX: '',
+      WEB3_BSC_URL: 'https://bsc-dataseed.binance.org/',
+      TOKEN_CONTRACT_ADDRESS: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+      STAKE_CONTRACT_ADDRESS: '0x90A3eAf71F734eDB6eACc20537bF8836235dD291',
+      HEARTBEAT_RATE: 20,
+      BASE_URL: 'https://liquidex.tech/?ref=',
+      PROJECT_ID: '5b88e380cb7f9736a57c4175e26f1c55',
+      CHAIN_ID: 56,
+      BSC_SCAN_URL: 'https://bscscan.com/tx/'
+    }
+  } else {
+    return {
+      DEPLOY_URL_PREFIX: '',
+      WEB3_BSC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+      TOKEN_CONTRACT_ADDRESS: '0x1E694CA11967Aa260BF32cedc9f5C09453E968d4',
+      STAKE_CONTRACT_ADDRESS: '0x361AFd215007c4dd57c8F4067ba5eA78549d2b6d',
+      HEARTBEAT_RATE: 20,
+      BASE_URL: 'https://liquidex.tech/?ref=',
+      PROJECT_ID: '5b88e380cb7f9736a57c4175e26f1c55',
+      CHAIN_ID: 97,
+      BSC_SCAN_URL: 'https://testnet.bscscan.com/tx/'
+    }
+  }
+}

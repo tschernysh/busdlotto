@@ -1,7 +1,7 @@
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Config } from 'config'
 import { configureChains, createConfig } from 'wagmi'
 import { bsc, bscTestnet } from 'wagmi/chains'
-import Config from 'config'
 
 export const initWagmi = () => {
   const chains = [bsc, bscTestnet]
