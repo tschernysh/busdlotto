@@ -1,10 +1,10 @@
-import { store } from 'store';
-import { Navigate } from 'react-router-dom';
 import applicationTypes from './types'
 import Web3 from 'web3';
 import { initWeb3 } from 'utils/initWeb3';
-import applicationReducer from '.';
+import ERC20 from 'contracts/ERC20.json'
+import ChainLotto from 'contracts/ChainLotto.json'
 import { Config } from 'config';
+import { getCurrentTicketIndex, getLastWinners } from 'api';
 
 export const ApplicationActionCreator = {
   setWalletAddress: (walletAddress) => ({
@@ -23,9 +23,9 @@ export const ApplicationActionCreator = {
     type: applicationTypes().SET_TOKEN_BALANCE,
     payload: tokenBalance
   }),
-  setBNBBalance: (bnbBalance) => ({
-    type: applicationTypes().SET_BNB_BALANCE,
-    payload: bnbBalance
+  setMaticBalance: (maticBalance) => ({
+    type: applicationTypes().SET_USDT_BALANCE,
+    payload: maticBalance
   }),
   setDepositData: (depositData) => ({
     type: applicationTypes().SET_DEPOSIT_DATA,
@@ -55,17 +55,54 @@ export const ApplicationActionCreator = {
     type: applicationTypes().SET_TOAST_DATA,
     payload: toastData
   }),
+  setBuyTicketsAmount: (amount) => ({
+    type: applicationTypes().SET_BUY_TICKETS_AMOUNT,
+    payload: amount
+  }),
+  setLastWinners: (lastWinners) => ({
+    type: applicationTypes().SET_LAST_WINNERS,
+    payload: lastWinners
+  }),
+  setCurrentTicketIndex: (currentTicketIndex) => ({
+    type: applicationTypes().SET_CURRENT_TICKET_INDEX,
+    payload: currentTicketIndex
+  }),
+  getCurrentTicketIndex:
+    () => async (dispatch, store) => {
+
+
+      const res = await getCurrentTicketIndex()
+
+      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.boughts[0].toTicket))
+
+    },
+  getLastWinners:
+    () => async (dispatch, store) => {
+      const web3 = new Web3(window.ethereum)
+
+      const res = await getLastWinners()
+
+      const lastWinners = res.winnerFounds?.map(el => {
+        let newAmount = el.amount.toString()
+        newAmount = +web3.utils.fromWei(newAmount, 'ether')
+
+        return { wallet: el.id, time: +el.blockTimestamp, amount: newAmount }
+
+      })
+
+      dispatch(ApplicationActionCreator.setLastWinners(lastWinners))
+    },
   getDefaultReferrer:
     () => async (dispatch, store) => {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = new Web3(Config().WEB3_BSC_URL);
 
-      const stakeContract = new web3.eth.Contract(Config().STAKE_CONTRACT_ADDRESS);
+      const chainLottoContract = new web3.eth.Contract(Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let defaultReferrer
 
       try {
-        defaultReferrer = await stakeContract.methods.DEFAULT_REFERRER().call()
+        defaultReferrer = await chainLottoContract.methods.developerWallet().call()
       } catch (error) {
         console.log(error)
         return
@@ -74,25 +111,25 @@ export const ApplicationActionCreator = {
       dispatch(ApplicationActionCreator.setDefaultReferrer(defaultReferrer))
 
     },
-  getAccountBNBBalance:
+  getAccountMaticBalance:
     () => async (dispatch, store) => {
 
       const walletRPC = store().applicationReducer.walletRPC
       const walletAddress = store().applicationReducer.walletAddress
       const web3 = await initWeb3(walletRPC)
 
-      let bnbBalance
+      let maticBalance
 
       try {
-        bnbBalance = await web3.eth.getBalance(walletAddress)
-        bnbBalance = bnbBalance.toString()
-        bnbBalance = +web3.utils.fromWei(bnbBalance, 'ether')
+        maticBalance = await web3.eth.getBalance(walletAddress)
+        maticBalance = maticBalance.toString()
+        maticBalance = +web3.utils.fromWei(maticBalance, 'ether')
       } catch (error) {
         console.log(error)
         return
       }
 
-      dispatch(ApplicationActionCreator.setBNBBalance(bnbBalance))
+      dispatch(ApplicationActionCreator.setMaticBalance(maticBalance))
 
     },
   getAccountTokenBalance:
@@ -102,7 +139,7 @@ export const ApplicationActionCreator = {
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
 
-      const tokenContract = new web3.eth.Contract('tokenAbi', Config().TOKEN_CONTRACT_ADDRESS)
+      const tokenContract = new web3.eth.Contract(ERC20.abi, Config().TOKEN_CONTRACT_ADDRESS)
 
 
       let tokenBalance
@@ -239,7 +276,7 @@ export const ApplicationActionCreator = {
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
       dispatch(ApplicationActionCreator.setIsWithdrawTransaction(true))
-      const stakeContract = new web3.eth.Contract();
+      const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let withdraw
       dispatch(ApplicationActionCreator.setToastData({
@@ -249,7 +286,7 @@ export const ApplicationActionCreator = {
       }))
 
       try {
-        withdraw = await stakeContract.methods.withdraw().send({ from: walletAddress })
+        withdraw = await chainLottoContract.methods.claim().send({ from: walletAddress })
 
         dispatch(ApplicationActionCreator.setToastData({
           type: 'loader',
@@ -277,16 +314,18 @@ export const ApplicationActionCreator = {
       dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
 
     },
-  depositToken:
-    (amount, time) => async (dispatch, store) => {
+  buyTicket:
+    () => async (dispatch, store) => {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
       const defaultReferrer = store().applicationReducer.defaultReferrer
-      const upline = store().accountReducer.userInfo.upline
+      const upline = store().accountReducer.upline
       const tokenBalance = store().applicationReducer.tokenBalance
+      const ticketPriceUsdt = store().applicationReducer.ticketPriceUsdt
+      const amount = store().applicationReducer.buyTicketsAmount
 
-      if (tokenBalance < amount) {
+      if (tokenBalance < amount * ticketPriceUsdt) {
         dispatch(ApplicationActionCreator.setToastData({
           type: 'error',
           duration: 5000,
@@ -303,8 +342,8 @@ export const ApplicationActionCreator = {
 
       dispatch(ApplicationActionCreator.setIsDepositTransaction(true))
 
-      const tokenContract = new web3.eth.Contract('tokkenabi', Config().TOKEN_CONTRACT_ADDRESS)
-      const stakeContract = new web3.eth.Contract();
+      const tokenContract = new web3.eth.Contract(ERC20.abi, Config().TOKEN_CONTRACT_ADDRESS)
+      const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let currentReferral
       const localReferral = localStorage.getItem("refAddress");
@@ -313,7 +352,7 @@ export const ApplicationActionCreator = {
       else if (localReferral) currentReferral = localReferral
       else currentReferral = defaultReferrer
 
-      const amountToSend = web3.utils.toWei(amount, 'ether')
+      const amountToSend = web3.utils.toWei(amount * ticketPriceUsdt, 'ether')
 
       let approveToken
 
@@ -323,25 +362,17 @@ export const ApplicationActionCreator = {
         text: <>Check your wallet to approve BUSD token</>,
       }))
 
+      console.log(Config().CHAIN_LOTTO_CONTRACT_ADDRESS, amountToSend)
+      web3.eth.getChainId().then(console.log);
+
       try {
         approveToken = await tokenContract.methods.approve(
-          Config().STAKE_CONTRACT_ADDRESS,
+          Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
           amountToSend
         ).send({ from: walletAddress })
 
-
-        dispatch(ApplicationActionCreator.setToastData({
-          type: 'loader',
-          duration: 0,
-          text: <>Approving your BUSD tokens</>,
-        }))
+        console.log(approveToken)
       } catch (error) {
-        dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
-        dispatch(ApplicationActionCreator.setToastData({
-          type: 'error',
-          duration: 0,
-          text: <>{error.message}</>,
-        }))
         console.log(error)
         return
       }
@@ -356,10 +387,9 @@ export const ApplicationActionCreator = {
       let depositTxn
 
       try {
-        depositTxn = await stakeContract.methods.deposit(
-          time,
-          currentReferral,
-          amountToSend
+        depositTxn = await chainLottoContract.methods.buyTicket(
+          amount,
+          currentReferral
         ).send({ from: walletAddress })
 
         dispatch(ApplicationActionCreator.setToastData({

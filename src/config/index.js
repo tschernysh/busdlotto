@@ -1,10 +1,11 @@
 
 export const Config = () => {
-  if (true) {
+  if (false) {
     return {
       WEB3_BSC_URL: 'https://polygon-mainnet.infura.io',
-      TOKEN_CONTRACT_ADDRESS: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-      STAKE_CONTRACT_ADDRESS: '0x90A3eAf71F734eDB6eACc20537bF8836235dD291',
+      TOKEN_CONTRACT_ADDRESS: '0xfaf8095a3a88bb265981404930703cb4226c510b',
+      CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
+      THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
       HEARTBEAT_RATE: 20,
       BASE_URL: 'https://liquidex.tech/?ref=',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
@@ -14,8 +15,9 @@ export const Config = () => {
   } else {
     return {
       WEB3_BSC_URL: 'https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78',
-      TOKEN_CONTRACT_ADDRESS: '0x1E694CA11967Aa260BF32cedc9f5C09453E968d4',
-      STAKE_CONTRACT_ADDRESS: '0x361AFd215007c4dd57c8F4067ba5eA78549d2b6d',
+      TOKEN_CONTRACT_ADDRESS: '0xfaf8095a3a88bb265981404930703cb4226c510b',
+      CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
+      THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
       HEARTBEAT_RATE: 20,
       BASE_URL: 'https://liquidex.tech/?ref=',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useSearchParams } from "react-router-dom"
 import { MainPage } from "Pages/MainPage/MainPage"
 import { WorkPage } from "Pages/WorkPage/WorkPage"
 import { ReferralPage } from "Pages/ReferralPage/ReferralPage"
@@ -15,7 +15,16 @@ export const ApplicationRoutes = (props) => {
 
   const { connector: activeConnector, address, isConnecting, isDisconnected } = useAccount()
   const { data, isError } = useWalletClient()
+  const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const referral = Object.fromEntries(searchParams.entries()).ref
+    if (referral) {
+      localStorage.setItem("refAddress", referral);
+    }
+
+  }, [searchParams])
 
   const disconnectWallet = () => {
     dispatch(AccountActionCreator.resetUserInfo())

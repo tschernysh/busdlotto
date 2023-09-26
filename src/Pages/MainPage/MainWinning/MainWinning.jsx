@@ -1,14 +1,11 @@
+import { useSelector } from "react-redux"
 
 
 export const MainWinning = () => {
 
-  const transactions = [
-    { amount: 40, time: '12:25:03 UTC', tx: 'XXXXXX' },
-    { amount: 50, time: '12:26:04 UTC', tx: 'XXXXXX' },
-    { amount: 60, time: '12:27:05 UTC', tx: 'XXXXXX' },
-    { amount: 70, time: '12:28:06 UTC', tx: 'XXXXXX' },
-    { amount: 70, time: '12:29:07 UTC', tx: 'XXXXXX' },
-  ]
+  const { lastWinnings } = useSelector(state => state.applicationReducer)
+
+  //time.toLocaleTimeString()
 
   return (
     <div className='max-w-screen-mmx mx-auto after__block_line mt-20'>
@@ -20,18 +17,18 @@ export const MainWinning = () => {
       </p>
       <div className='flex gap-x-8 items-center mb-16'>
         <div className='flex flex-col gap-y-12 winning__block_border w-full pt-5'>
-          {transactions.map(el => {
+          {lastWinnings.map(el => {
             return <WinningTile value={el.amount + ' USDT'} />
           })}
         </div>
         <div className='flex flex-col gap-y-12 winning__block_border w-full pt-5'>
-          {transactions.map(el => {
-            return <WinningTile value={el.time} />
+          {lastWinnings.map(el => {
+            return <WinningTile value={new Date(el.time).toLocaleTimeString()} />
           })}
         </div>
         <div className='flex flex-col gap-y-12 winning__block_border w-full pt-5'>
-          {transactions.map(el => {
-            return <WinningTile value={el.tx} />
+          {lastWinnings.map(el => {
+            return <WinningTile value={el.wallet.slice(0, 4) + '...' + el.wallet.slice(-4)} />
           })}
         </div>
       </div>
@@ -40,7 +37,6 @@ export const MainWinning = () => {
 }
 
 const WinningTile = (props) => {
-  console.log(props)
   return (
     <div className='text-white text-4xl font-inter800 winning__block_line text-center '>
       {props.value}

@@ -1,6 +1,14 @@
+import { Button } from "Components/Button/Button"
+import { useDispatch } from "react-redux"
+import { ApplicationActionCreator } from "store/reducers/application/action-creator"
 
 
 export const ResultsBlock = () => {
+  const dispatch = useDispatch()
+
+  const handleClaim = () => {
+    dispatch(ApplicationActionCreator.withdraw())
+  }
 
   return (
     <div className='mt-20 pb-20 -mb-20 max-w-screen-mmx mx-auto'>
@@ -32,6 +40,7 @@ export const ResultsBlock = () => {
           <h3 className='font-poppins400 text-description text-3xl flex items-center gap-x-2'>-</h3>
         </div>
       </div>
+      <Button onClick={handleClaim}>Claim</Button>
     </div>
   )
 }
