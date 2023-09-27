@@ -78,10 +78,14 @@ export const AccountActionCreator = {
       let availableReward
       try {
         availableReward = await chainLottoContract.methods.rewardOf(walletAddress).call()
+        availableReward = availableReward.toString()
+        availableReward = +web3.utils.fromWei(availableReward, 'ether')
       } catch (error) {
         console.log(error)
         return
       }
+
+      console.log(availableReward)
 
       dispatch(AccountActionCreator.setAvailableRewards(availableReward))
 
@@ -89,10 +93,26 @@ export const AccountActionCreator = {
   getUserWinnings:
     () => async (dispatch, store) => {
       const walletAddress = store().applicationReducer.walletAddress
+      const walletRPC = store().applicationReducer.walletRPC
+      const web3 = await initWeb3(walletRPC)
 
       const res = await getUserWinnings(walletAddress)
 
       console.log(res)
+
+      const userWinnings = {}
+
+      res.winnerFounds.map(el => {
+        let winValue = Object.values(el)[0]
+        winValue = +web3.utils.fromWei(winValue, 'ether')
+        if (userWinnings[winValue]) userWinnings[winValue] = userWinnings[winValue] + 1
+        else userWinnings[winValue] = 1
+
+        console.log(userWinnings)
+
+      })
+
+      dispatch(AccountActionCreator.setUserWinnings(userWinnings))
 
     },
   getReferralsBonus:
@@ -101,10 +121,15 @@ export const AccountActionCreator = {
 
       const res = await getReferralsBonus(walletAddress)
 
+      console.log(res)
       const userReferralsBonus = res?.referralBonusGranteds.map(el => {
         return { wallet: el.buyer, ticketsBought: el.numberOfTickets, level: el.level, commision: el.rewardPerRefferer }
       })
 
-      dispatch(AccountActionCreator.setReferralsBonus(userReferralsBonus))
+      if (userReferralsBonus) {
+
+        dispatch(AccountActionCreator.setReferralsBonus(userReferralsBonus))
+      }
+
     }
 } 

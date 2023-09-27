@@ -6,7 +6,7 @@ import { polygon, polygonMumbai } from 'wagmi/chains'
 export const initWagmi = () => {
   const chains = [polygon, polygonMumbai]
   const projectId = Config().PROJECT_ID
-
+  console.log(projectId)
   const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
   const wagmiConfig = createConfig({
     autoConnect: true,

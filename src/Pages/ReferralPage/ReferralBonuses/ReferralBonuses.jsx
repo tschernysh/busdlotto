@@ -1,14 +1,9 @@
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
-
-const tableList = [
-  { wallet: '1234567890', level: 1, ticketsBought: 10, commision: 100000 },
-  { wallet: '1234567890', level: 1, ticketsBought: 10, commision: 100000 },
-  { wallet: '1234567890', level: 1, ticketsBought: 10, commision: 100000 }
-]
-
-
+import { useSelector } from "react-redux"
 
 export const ReferralBonuses = () => {
+  const { referralsBonus } = useSelector(state => state.accountReducer)
+
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto '>
       <h1 className='font-inter800 text-7xl mb-24 text-white'>
@@ -25,7 +20,7 @@ export const ReferralBonuses = () => {
             </tr>
           </thead>
           <tbody className=''>
-            {tableList.map(el => <TableElement {...el} />)}
+            {referralsBonus.map(el => <TableElement {...el} />)}
           </tbody>
         </table>
       </div>

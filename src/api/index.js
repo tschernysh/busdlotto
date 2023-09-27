@@ -31,7 +31,7 @@ export const getLastWinners = async () => {
 export const getUserWinnings = async (userAddress) => {
   const query = `
 {
-  winnerFounds(where: {winner: ${userAddress} }) {
+  winnerFounds(where: {winner: "${userAddress}" }) {
     amount
   }
 }`;
@@ -49,8 +49,7 @@ export const getCurrentTicketIndex = async () => {
   boughts(first: 1, orderBy: amount, orderDirection: desc) {
     toTicket
   }
-}
-`;
+}`;
 
   const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
     query: query

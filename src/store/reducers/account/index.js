@@ -17,7 +17,7 @@ export const initialState = {
 export default function accountReducer(state = initialState, action) {
   switch (action.type) {
     case accountTypes().SET_USER_WINNINGS:
-      return { ...state, userWinnings: action.payload }
+      return { ...state, userWinnings: { ...state.userWinnings, ...action.payload } }
     case accountTypes().SET_REFERRALS_BONUS:
       return { ...state, referralsBonus: action.payload }
     case accountTypes().SET_AVAILABLE_REWARD:

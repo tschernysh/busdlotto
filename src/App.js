@@ -7,7 +7,7 @@ import { ApplicationRoutes } from 'Routes/ApplicationRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { initWagmi } from 'utils/initWagmi';
-import { WagmiConfig } from 'wagmi';
+import { useContractWrite, WagmiConfig } from 'wagmi';
 import { ApplicationActionCreator } from 'store/reducers/application/action-creator';
 import { Config } from 'config';
 import { ConfigContext } from 'applicationContext';
@@ -28,6 +28,7 @@ function App() {
   const [boughtModalShow, setBoughtModalShow] = useState(false)
 
 
+
   useMemo(() => {
     const { wagmiConfig, ethereumClient, projectId } = initWagmi()
 
@@ -45,20 +46,26 @@ function App() {
       dispatch(ApplicationActionCreator.getAccountTokenBalance())
       dispatch(AccountActionCreator.getUserWinnings())
       dispatch(AccountActionCreator.getReferralsBonus())
+      dispatch(AccountActionCreator.getAvailableRewards())
     }
-    //dispatch(ApplicationActionCreator.getDefaultReferrer())
   }, [walletAddress])
 
 
 
-  /*
   useEffect(() => {
     let interval
     interval = setInterval(() => {
       if (!seconds) {
         if (notCorrectChain) return
-
-        if (!!walletAddress) {
+        dispatch(ApplicationActionCreator.getLastWinners())
+        dispatch(ApplicationActionCreator.getCurrentTicketIndex())
+        if (walletAddress) {
+          dispatch(AccountActionCreator.getUpline())
+          dispatch(ApplicationActionCreator.getAccountMaticBalance())
+          dispatch(ApplicationActionCreator.getAccountTokenBalance())
+          dispatch(AccountActionCreator.getUserWinnings())
+          dispatch(AccountActionCreator.getReferralsBonus())
+          dispatch(AccountActionCreator.getAvailableRewards())
         }
         setSeconds(1);
       } else if (seconds > Config().HEARTBEAT_RATE) {
@@ -68,15 +75,20 @@ function App() {
 
     return () => clearInterval(interval);
   }, [seconds])
-*/
 
   useEffect(() => {
     if (isNeedUpdate) {
       setBuyModalShow(false)
       setBoughtModalShow(true)
       if (!!walletAddress) {
+        dispatch(AccountActionCreator.getUpline())
+        dispatch(ApplicationActionCreator.getAccountMaticBalance())
+        dispatch(ApplicationActionCreator.getAccountTokenBalance())
+        dispatch(AccountActionCreator.getUserWinnings())
+        dispatch(AccountActionCreator.getReferralsBonus())
+        dispatch(AccountActionCreator.getAvailableRewards())
       }
-      dispatch(ApplicationActionCreator.setIsNeedUpdate(false))
+      dispatch(ApplicationActionCreator.setIsNeedToUpdate(false))
     }
   }, [isNeedUpdate])
 
