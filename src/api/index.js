@@ -77,3 +77,18 @@ export const getReferralsBonus = async (userAddress) => {
   return res.data.data
 }
 
+export const getTotalUserTicketsBought = async (userAddress) => {
+  const query = `
+    {
+      boughts(where: {buyer: "${userAddress}"}) {
+        amount
+      }
+    }
+  `
+
+  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+    query: query
+  })
+
+  return res.data.data
+}

@@ -23,7 +23,7 @@ export const ResultsBlock = () => {
 
       </div>
       <div className='text-center mt-12'>
-        <Button disabled={!availableReward} onClick={handleClaim}>Claim</Button>
+        <Button disabled={!availableReward} onClick={handleClaim}>Get your reward now!</Button>
       </div>
     </div>
   )

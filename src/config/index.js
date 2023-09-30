@@ -7,7 +7,7 @@ export const Config = () => {
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
       HEARTBEAT_RATE: 20,
-      BASE_URL: 'https://liquidex.tech/?ref=',
+      BASE_URL: 'https://www.chainlotto.io/',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
       CHAIN_ID: 137,
       BSC_SCAN_URL: 'https://polygonscan.com/tx/'
@@ -19,10 +19,11 @@ export const Config = () => {
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
       HEARTBEAT_RATE: 20,
-      BASE_URL: 'https://liquidex.tech/?ref=',
+      BASE_URL: 'https://www.chainlotto.io/',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
       CHAIN_ID: 80001,
-      BSC_SCAN_URL: 'https://mumbai.polygonscan.com/tx/'
+      BSC_SCAN_URL: 'https://mumbai.polygonscan.com/tx/',
+      CHAIN_LOTTO_CONTRACT: 'https://mumbai.polygonscan.com/address/'
     }
   }
 }

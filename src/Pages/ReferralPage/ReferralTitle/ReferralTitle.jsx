@@ -1,9 +1,42 @@
+import { ToastifyContext } from "applicationContext"
 import { Button } from "Components/Button/Button"
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
+import { Config } from "config"
+import { useContext, useMemo } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 
 export const ReferralTitle = () => {
+
+  const baseUrl = Config().BASE_URL;
+  const { upline } = useSelector(store => store.accountReducer)
+  const { defaultReferrer, walletAddress } = useSelector(store => store.applicationReducer)
+  const { setToastifyData } = useContext(ToastifyContext)
+
+  const referrer = upline || localStorage.getItem('refAddress') || defaultReferrer
+
+  const referralUrl = useMemo(() => {
+    return `${baseUrl}${walletAddress}`
+  }, [walletAddress, upline])
+
+  const copyReferralUrlToClipboard = () => {
+    console.log(upline)
+    if (!upline) {
+      setToastifyData({
+        text: 'You need to make first deposit to invite referrals!',
+        description: 'Error'
+      })
+    } else {
+      console.log(referralUrl)
+      navigator.clipboard.writeText(referralUrl)
+
+      setToastifyData({
+        text: 'The referral link has been copied!',
+        description: 'Success'
+      })
+    }
+  }
 
   return (
     <div className='max-w-screen-mmx mx-auto after__block_line'>
@@ -15,7 +48,7 @@ export const ReferralTitle = () => {
         To participate, simply connect your wallet, get your unique ID number, referral link, and start inviting others to join and earn.
       </p>
       <div className=' flex items-center mb-16'>
-        <ConnectWallet />
+        <Button onClick={copyReferralUrlToClipboard}>View Referral Link</Button>
       </div>
     </div>
   )

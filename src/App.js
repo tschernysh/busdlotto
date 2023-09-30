@@ -10,16 +10,17 @@ import { initWagmi } from 'utils/initWagmi';
 import { useContractWrite, WagmiConfig } from 'wagmi';
 import { ApplicationActionCreator } from 'store/reducers/application/action-creator';
 import { Config } from 'config';
-import { ConfigContext } from 'applicationContext';
+import { ConfigContext, ToastifyContext } from 'applicationContext';
 import { BuyTicket } from 'Modals/BuyTicket';
 import { BoughtModal } from 'Modals/BoughtModal';
 import { AccountActionCreator } from 'store/reducers/account/action-creator';
+import { Toastify } from 'Components/Toastify/Toastify';
 
 function App() {
   const dispatch = useDispatch()
   const {
-    walletAddress, isNeedUpdate, notCorrectChain
-  } = useSelector(state => state.applicationReducer)
+    walletAddress, isNeedUpdate, notCorrectChain,
+    toastData } = useSelector(state => state.applicationReducer)
   const [seconds, setSeconds] = useState(0)
   const [wagmiConfig, setWagmiConfig] = useState()
   const [ethereumClient, setEthereumClient] = useState()
@@ -40,6 +41,7 @@ function App() {
   useEffect(() => {
     dispatch(ApplicationActionCreator.getLastWinners())
     dispatch(ApplicationActionCreator.getCurrentTicketIndex())
+    dispatch(ApplicationActionCreator.getDefaultReferrer())
     if (walletAddress) {
       dispatch(AccountActionCreator.getUpline())
       dispatch(ApplicationActionCreator.getAccountMaticBalance())
@@ -47,6 +49,7 @@ function App() {
       dispatch(AccountActionCreator.getUserWinnings())
       dispatch(AccountActionCreator.getReferralsBonus())
       dispatch(AccountActionCreator.getAvailableRewards())
+      dispatch(AccountActionCreator.getTotalTicketsBought())
     }
   }, [walletAddress])
 
@@ -66,6 +69,7 @@ function App() {
           dispatch(AccountActionCreator.getUserWinnings())
           dispatch(AccountActionCreator.getReferralsBonus())
           dispatch(AccountActionCreator.getAvailableRewards())
+          dispatch(AccountActionCreator.getTotalTicketsBought())
         }
         setSeconds(1);
       } else if (seconds > Config().HEARTBEAT_RATE) {
@@ -129,17 +133,24 @@ function App() {
     };
   }, []);
 
+  const setToastData = (data) => {
+    dispatch(ApplicationActionCreator.setToastData(data))
+  }
+
   return (
     <ConfigContext.Provider value={{ buyModalShow, setBuyModalShow, boughtModalShow, setBoughtModalShow }}>
-      <BrowserRouter>
-        <WagmiConfig config={wagmiConfig}>
-          <Header />
-          <ApplicationRoutes projectId={projectId} ethereumClient={ethereumClient} />
-          {buyModalShow && <BuyTicket />}
-          {boughtModalShow && <BoughtModal />}
-          <Footer />
-        </WagmiConfig>
-      </BrowserRouter>
+      <ToastifyContext.Provider value={{ toastData, setToastifyData: setToastData }}>
+        <BrowserRouter>
+          <WagmiConfig config={wagmiConfig}>
+            <Header />
+            <ApplicationRoutes projectId={projectId} ethereumClient={ethereumClient} />
+            {buyModalShow && <BuyTicket />}
+            {boughtModalShow && <BoughtModal />}
+            <Toastify />
+            <Footer />
+          </WagmiConfig>
+        </BrowserRouter>
+      </ToastifyContext.Provider>
     </ConfigContext.Provider>
   );
 }

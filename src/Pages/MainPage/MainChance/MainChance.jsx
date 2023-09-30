@@ -1,5 +1,6 @@
 import TicketLogo from 'Assets/ticketLogo.png'
 import { ConnectWallet } from 'Components/ConnectWallet/ConnectWallet'
+import { useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -15,15 +16,23 @@ const carouselOptions = {
   centerSlidePercentage: 100,
 }
 
+const tickets = [
+  { tickets: 20, reward: 40 },
+  { tickets: 100, reward: 100 },
+  { tickets: 1000, reward: 1000 },
+  { tickets: 10000, reward: 10000 },
+  { tickets: 100000, reward: 100000 },
+]
+
 export const MainChance = () => {
+
+  const { currentTicketIndex } = useSelector(state => state.applicationReducer)
 
   return (
     <div className='mx-auto after__block_line mt-20'>
       <h1 className='text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
       <Carousel className='landing__main__carousel' {...carouselOptions}>
-        <Ticket />
-        <Ticket />
-        <Ticket />
+        {tickets.map(el => <Ticket {...el} currentTicketIndex={currentTicketIndex} />)}
       </Carousel>
       <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
@@ -40,7 +49,7 @@ const Ticket = (props) => {
       <img className='mb-20' src={TicketLogo} />
       <div className='ticket__block_field mb-10'></div>
       <p className='font-poppins400 text-description text-4xl'>
-        tickets till the next <span className='font-poppins600'>100 USDT</span> draw
+        {props.tickets - props.currentTicketIndex >= 0 ? props.tickets - props.currentTicketIndex : 0} tickets till the next <span className='font-poppins600'>{props.reward} USDT</span> draw
       </p>
     </div>
   )

@@ -5,30 +5,13 @@ import { ApplicationActionCreator } from "../application/action-creator";
 import { initWeb3 } from "utils/initWeb3";
 import { Config } from "config";
 import ChainLotto from 'contracts/ChainLotto.json'
-import { getReferralsBonus, getUserWinnings } from "api";
+import { getReferralsBonus, getTotalUserTicketsBought, getUserWinnings } from "api";
 
 export const AccountActionCreator = {
   resetUserInfo:
     () => async (dispatch, store) => {
-      const userInfo = {
-        payoutOf: 0,
-        upline: null,
-        dividents: 0,
-        match_bonus: 0,
-        leader_bonus: 0,
-        last_payout: 0,
-        total_invested: 0,
-        total_withdrawn: 0,
-        total_match_bonus: 0,
-        leadTurnover: 0,
-        leadBonusReward: 0,
-        receivedBonuses: [],
-        deposits: [],
-        structure: [],
-        referrals: 0,
-        refTurnover: []
-      }
 
+      dispatch(AccountActionCreator.resetUserInfoData())
       dispatch(ApplicationActionCreator.setWalletAddress(null))
 
     },
@@ -48,22 +31,48 @@ export const AccountActionCreator = {
     type: accountTypes().SET_UPLINE,
     payload: upline
   }),
+  setTotalTicketsBought: (totalTicketBought) => ({
+    type: accountTypes().SET_TOTAL_TICKETS_BOUGHT,
+    payload: totalTicketBought
+  }),
+  resetUserInfoData: () => ({
+    type: accountTypes().RESET_USER_INFO
+  }),
+  getTotalTicketsBought:
+    () => async (dispatch, store) => {
+      const walletAddress = store().applicationReducer.walletAddress
+
+      let totalTicketBought
+
+      try {
+        const res = await getTotalUserTicketsBought(walletAddress)
+        totalTicketBought = res.boughts.reduce((acc, curr) => acc + +curr.amount, 0)
+      } catch (error) {
+        console.log(error)
+        return
+      }
+
+      dispatch(AccountActionCreator.setTotalTicketsBought(totalTicketBought))
+
+    },
   getUpline:
     () => async (dispatch, store) => {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
-
+      console.log('upline: ', ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS)
       const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let upline
+      console.log(walletAddress)
       try {
-        upline = await chainLottoContract.methods.referrals(walletAddress).call()
-        upline = upline[0]
+        upline = await chainLottoContract.methods.referrals(walletAddress, 0).call()
       } catch (error) {
         console.log(error)
         return
       }
+
+      if (!upline) return
 
       dispatch(AccountActionCreator.setUpline(upline))
     },
@@ -98,7 +107,6 @@ export const AccountActionCreator = {
 
       const res = await getUserWinnings(walletAddress)
 
-      console.log(res)
 
       const userWinnings = {}
 
@@ -108,7 +116,6 @@ export const AccountActionCreator = {
         if (userWinnings[winValue]) userWinnings[winValue] = userWinnings[winValue] + 1
         else userWinnings[winValue] = 1
 
-        console.log(userWinnings)
 
       })
 

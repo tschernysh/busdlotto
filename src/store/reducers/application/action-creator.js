@@ -97,7 +97,7 @@ export const ApplicationActionCreator = {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = new Web3(Config().WEB3_BSC_URL);
 
-      const chainLottoContract = new web3.eth.Contract(Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
+      const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let defaultReferrer
 
@@ -108,6 +108,7 @@ export const ApplicationActionCreator = {
         return
       }
 
+      if (!defaultReferrer) return
       dispatch(ApplicationActionCreator.setDefaultReferrer(defaultReferrer))
 
     },
@@ -266,6 +267,7 @@ export const ApplicationActionCreator = {
 
       const chainId = await getConnectedChainId()
       const currentAddress = walletRPC.account.address
+      web3.eth.defaultAccount = web3.eth.accounts[0]
       console.log('Wallet connected:', currentAddress)
       dispatch(ApplicationActionCreator.setWalletAddress(currentAddress))
 
@@ -279,12 +281,6 @@ export const ApplicationActionCreator = {
       const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let withdraw
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'default',
-        duration: 5000,
-        text: <>Check your wallet to withdraw</>,
-      }))
-
 
       const claimData = chainLottoContract.methods.claim().encodeABI()
 
@@ -304,18 +300,12 @@ export const ApplicationActionCreator = {
         console.log(error)
         dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
         dispatch(ApplicationActionCreator.setToastData({
-          type: 'error',
-          duration: 0,
           text: <>{error.message}</>,
+          description: <>Transaction error</>
         }))
         return
       }
 
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'success',
-        duration: 0,
-        text: <>You have successfuly withdrawed BUSD <br /> <a target='_blank' href={Config().BSC_SCAN_URL + withdraw.transactionHash}>View on BSC Scan</a> </>,
-      }))
 
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(true))
       dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
@@ -334,18 +324,11 @@ export const ApplicationActionCreator = {
 
       if (tokenBalance < amount * ticketPriceUsdt) {
         dispatch(ApplicationActionCreator.setToastData({
-          type: 'error',
-          duration: 5000,
-          text: <>Your balance of BUSD is not enough</>,
+          text: <>Your wallet balance is too low for the transaction.</>,
+          description: <>Please top it up!</>
         }))
         return
       }
-
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'loader',
-        duration: 0,
-        text: <>Approving your BUSD tokens</>,
-      }))
 
       dispatch(ApplicationActionCreator.setIsDepositTransaction(true))
 
@@ -362,13 +345,6 @@ export const ApplicationActionCreator = {
       const amountToSend = web3.utils.toWei(amount * ticketPriceUsdt, 'ether')
 
 
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'default',
-        duration: 5000,
-        text: <>Check your wallet to approve BUSD token</>,
-      }))
-
-
       const approveData = tokenContract.methods.approve(Config().CHAIN_LOTTO_CONTRACT_ADDRESS, amountToSend).encodeABI()
 
       let approveToken
@@ -381,41 +357,27 @@ export const ApplicationActionCreator = {
         })
         console.log(approveToken)
       } catch (error) {
+        dispatch(ApplicationActionCreator.setToastData({
+          text: <>{error.message}</>,
+          description: <>Transaction error</>
+        }))
         console.log(error)
         return
       }
 
-      alert('Successfully approved usdt')
-
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'success',
-        duration: 5000,
-        text: <>Approved BUSD <br /> <a target='_blank' href={Config().BSC_SCAN_URL + approveToken.transactionHash}>View on BSC Scan</a> </>,
-      }))
-
       let depositTxn
-
       const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral).encodeABI()
-
       try {
         depositTxn = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
           data: buyData
         })
-
-        dispatch(ApplicationActionCreator.setToastData({
-          type: 'loader',
-          duration: 0,
-          text: <>Deposit transaction</>,
-        }))
       } catch (error) {
         dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
-
         dispatch(ApplicationActionCreator.setToastData({
-          type: 'error',
-          duration: 0,
           text: <>{error.message}</>,
+          description: <>Transaction error</>
         }))
         console.log(error)
         return
@@ -427,7 +389,6 @@ export const ApplicationActionCreator = {
         text: <>You have successfuly deposited BUSD <br /> <a target='_blank' href={Config().BSC_SCAN_URL + depositTxn.transactionHash}>View on BSC Scan</a>  </>,
       }))
 
-      alert('Successfully bought ' + amount + 'tickets')
       dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(true))
     }

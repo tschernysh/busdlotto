@@ -87,11 +87,12 @@
     background-repeat: no-repeat;
     background-size: fit;
     background-position: center;
-  } .referral__background{
+  } 
+  .referral__background{
     background-image: url(Assets/referral/coins.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: -600px -300px ;
+    background-position: -500px -300px ;
   }
   .result__background{
     background-image: url(Assets/results/bg.png);
@@ -174,6 +175,11 @@
     border-radius: 20px;
     border: 4px solid var(--22, #FFCB12);
     background: linear-gradient(70deg, #0F4789 1.81%, rgba(15, 71, 137, 0.00) 117.31%);
+  }
+  .bought__ticket_header {
+    border-radius: 8px;
+    border: 1px solid var(--text-gold, #E2B20B);
+    background: var(--icon, linear-gradient(90deg, #0A2C61 3.38%, rgba(15, 71, 137, 0.00) 108.42%));
   }
 }
 
