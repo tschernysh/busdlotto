@@ -9,7 +9,7 @@ const api = axios.create({
 export const getLastWinners = async () => {
   const query = `
 {
-  winnerFounds(first: 5) {
+  wonDrawns(first: 5) {
     id
     amount
     winner
@@ -31,7 +31,7 @@ export const getLastWinners = async () => {
 export const getUserWinnings = async (userAddress) => {
   const query = `
 {
-  winnerFounds(where: {winner: "${userAddress}" }) {
+  wonDrawns(where: {winner: "${userAddress}" }) {
     amount
   }
 }`;
@@ -46,7 +46,7 @@ export const getUserWinnings = async (userAddress) => {
 export const getCurrentTicketIndex = async () => {
   const query = `
 {
-  boughts(first: 1, orderBy: amount, orderDirection: desc) {
+  ticketBoughts(first: 1, orderBy: amount, orderDirection: desc) {
     toTicket
   }
 }`;
@@ -61,7 +61,7 @@ export const getCurrentTicketIndex = async () => {
 export const getReferralsBonus = async (userAddress) => {
   const query = `
 {
-  referralBonusGranteds(first: 100, where: {referral: ${userAddress}, orderBy: blockTimestamp, orderDirection: desc ) {
+  referralBonusGranteds(first: 100, where: {referral: ${userAddress || ''}, orderBy: blockTimestamp, orderDirection: desc} ) {
     buyer
     level
     numberOfTickets
@@ -80,7 +80,7 @@ export const getReferralsBonus = async (userAddress) => {
 export const getTotalUserTicketsBought = async (userAddress) => {
   const query = `
     {
-      boughts(where: {buyer: "${userAddress}"}) {
+      ticketBoughts(where: {buyer: "${userAddress}"}) {
         amount
       }
     }

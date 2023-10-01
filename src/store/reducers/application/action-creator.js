@@ -73,7 +73,7 @@ export const ApplicationActionCreator = {
 
       const res = await getCurrentTicketIndex()
 
-      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.boughts[0].toTicket))
+      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0].toTicket))
 
     },
   getLastWinners:
@@ -82,11 +82,11 @@ export const ApplicationActionCreator = {
 
       const res = await getLastWinners()
 
-      const lastWinners = res.winnerFounds?.map(el => {
+      const lastWinners = res.wonDrawns?.map(el => {
         let newAmount = el.amount.toString()
         newAmount = +web3.utils.fromWei(newAmount, 'ether')
 
-        return { wallet: el.id, time: +el.blockTimestamp, amount: newAmount }
+        return { wallet: el.winner, time: +el.blockTimestamp, amount: newAmount }
 
       })
 
@@ -382,12 +382,6 @@ export const ApplicationActionCreator = {
         console.log(error)
         return
       }
-
-      dispatch(ApplicationActionCreator.setToastData({
-        type: 'success',
-        duration: 5000,
-        text: <>You have successfuly deposited BUSD <br /> <a target='_blank' href={Config().BSC_SCAN_URL + depositTxn.transactionHash}>View on BSC Scan</a>  </>,
-      }))
 
       dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(true))

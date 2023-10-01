@@ -34,13 +34,13 @@ export const BuyTicket = () => {
         <p className='font-poppins400 text-3xl text-description mb-8'>Select number of tickets to buy</p>
         <div className='flex items-center gap-x-10 justify-center mb-10'>
           <div className='flex items-center justify-center bg-gold text-title w-10 h-10 rounded-full text-4xl cursor-pointer ' onClick={handleMinusTicketAmount}>
-            <span>
+            <span style={{ transform: 'translate(0px, -2px)' }}>
               -
             </span>
           </div>
           <div className='font-inter400 text-title text-4xl'>{buyTicketsAmount}</div>
           <div className='flex items-center justify-center bg-gold text-title w-10 h-10 rounded-full text-4xl cursor-pointer' onClick={handlePlusTicketAmount}>
-            <span>
+            <span style={{ transform: 'translate(0px, -2px)' }}>
               +
             </span>
           </div>

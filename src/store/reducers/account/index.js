@@ -3,7 +3,8 @@ import accountTypes from "./types";
 export const initialState = {
   upline: null,
   availableReward: 0,
-  referralBonusAmount: 0,
+  referralBonusPages: 0,
+  referralCurrentPage: 0,
   referralsBonus: [],
   totalTicketsBought: 0,
   userWinnings: {

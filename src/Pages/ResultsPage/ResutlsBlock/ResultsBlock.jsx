@@ -13,7 +13,7 @@ export const ResultsBlock = () => {
 
   return (
     <div className='mt-20 pb-20 -mb-20 max-w-screen-mmx mx-auto'>
-      <div className='bg-blue rounded-2xl p-10 w-8/12 mx-auto'>
+      <div className='bg-blue sm:rounded-2xl p-10 w-full sm:w-8/12 mx-auto'>
         <div className='flex items-center justify-between mb-12'>
           <h3 className='font-poppins600 text-gold text-4xl'>Winnings</h3>
           <h3 className='font-poppins600 text-gold text-4xl'>Results</h3>
@@ -22,7 +22,7 @@ export const ResultsBlock = () => {
         {Object.keys(userWinnings).map(el => <ResultTile title={el} value={userWinnings[el]} />)}
 
       </div>
-      <div className='text-center mt-12'>
+      <div className='text-center mt-12 px-4 sm:px-0'>
         <Button disabled={!availableReward} onClick={handleClaim}>Get your reward now!</Button>
       </div>
     </div>

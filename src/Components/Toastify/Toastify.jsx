@@ -9,7 +9,7 @@ export const Toastify = () => {
   const cleartoastData = () => {
     setToastifyData(null)
   }
-  console.log(toastData)
+
   return (
     <>
       {toastData && (<div className={`fixed z-50 left-0 top-0 bg-black/75 backdrop-blur-md w-screen h-screen flex items-center justify-center`}>

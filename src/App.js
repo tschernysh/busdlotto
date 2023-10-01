@@ -19,7 +19,7 @@ import { Toastify } from 'Components/Toastify/Toastify';
 function App() {
   const dispatch = useDispatch()
   const {
-    walletAddress, isNeedUpdate, notCorrectChain,
+    walletAddress, isNeedToUpdate, notCorrectChain,
     toastData } = useSelector(state => state.applicationReducer)
   const [seconds, setSeconds] = useState(0)
   const [wagmiConfig, setWagmiConfig] = useState()
@@ -81,7 +81,7 @@ function App() {
   }, [seconds])
 
   useEffect(() => {
-    if (isNeedUpdate) {
+    if (isNeedToUpdate) {
       setBuyModalShow(false)
       setBoughtModalShow(true)
       if (!!walletAddress) {
@@ -94,7 +94,7 @@ function App() {
       }
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(false))
     }
-  }, [isNeedUpdate])
+  }, [isNeedToUpdate])
 
   useEffect(() => {
     if (notCorrectChain) alert('Connect to another supported chain')

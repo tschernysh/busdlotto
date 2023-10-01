@@ -46,7 +46,7 @@ export const AccountActionCreator = {
 
       try {
         const res = await getTotalUserTicketsBought(walletAddress)
-        totalTicketBought = res.boughts.reduce((acc, curr) => acc + +curr.amount, 0)
+        totalTicketBought = res.ticketBoughts.reduce((acc, curr) => acc + +curr.amount, 0)
       } catch (error) {
         console.log(error)
         return
@@ -110,7 +110,7 @@ export const AccountActionCreator = {
 
       const userWinnings = {}
 
-      res.winnerFounds.map(el => {
+      res.wonDrawns.map(el => {
         let winValue = Object.values(el)[0]
         winValue = +web3.utils.fromWei(winValue, 'ether')
         if (userWinnings[winValue]) userWinnings[winValue] = userWinnings[winValue] + 1
@@ -134,7 +134,6 @@ export const AccountActionCreator = {
       })
 
       if (userReferralsBonus) {
-
         dispatch(AccountActionCreator.setReferralsBonus(userReferralsBonus))
       }
 
