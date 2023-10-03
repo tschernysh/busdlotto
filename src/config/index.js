@@ -10,7 +10,8 @@ export const Config = () => {
       BASE_URL: 'https://www.chainlotto.io/',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
       CHAIN_ID: 137,
-      BSC_SCAN_URL: 'https://polygonscan.com/tx/'
+      BSC_SCAN_URL: 'https://polygonscan.com/tx/',
+      BONUS_PAGE_ITEMS: 10,
     }
   } else {
     return {
@@ -23,7 +24,8 @@ export const Config = () => {
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
       CHAIN_ID: 80001,
       BSC_SCAN_URL: 'https://mumbai.polygonscan.com/tx/',
-      CHAIN_LOTTO_CONTRACT: 'https://mumbai.polygonscan.com/address/'
+      CHAIN_LOTTO_CONTRACT: 'https://mumbai.polygonscan.com/address/',
+      BONUS_PAGE_ITEMS: 5,
     }
   }
 }

@@ -1,12 +1,29 @@
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
+import { Config } from "config"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { ReactComponent as Arrow } from 'Assets/arrow.svg'
+
+const referralsBonus = [
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 600, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 200, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
+]
 
 export const ReferralBonuses = () => {
-  const { referralsBonus, referralsBonusPages, referralCurrentPage } = useSelector(state => state.accountReducer)
+  const { referralsBonusPages } = useSelector(state => state.accountReducer)
   const dispatch = useDispatch()
   const [paginationValue, setPaginationValue] = useState([])
-  const pagination = Math.ceil(referralsBonusPages / 10)
+  const [referralCurrentPage, setReferralCurrentPage] = useState(1)
+  const pagination = Math.ceil(referralsBonus.length / Config().BONUS_PAGE_ITEMS)
 
   const setInitialPagination = (pagination) => {
     let initialPagination = []
@@ -34,7 +51,8 @@ export const ReferralBonuses = () => {
   }, [pagination])
 
   const handleChangePage = (page) => {
-    dispatch()
+    console.log(page)
+    setReferralCurrentPage(page)
   }
 
   useEffect(() => {
@@ -64,29 +82,43 @@ export const ReferralBonuses = () => {
       <h1 className='font-inter800 text-5xl sm:text-7xl px-4 sm:px-0 mb-24 text-white'>
         Experience the benefits
       </h1>
-      <div className='bg-blue p-10 sm:rounded-2xl'>
-        <table className='w-full table-fixed border-collapse'>
-          <thead className='text-gold text-4xl font-poppins600'>
-            <tr>
-              <th>Wallet number</th>
-              <th>Level</th>
-              <th>Tickets bought</th>
-              <th>Your comission</th>
-            </tr>
-          </thead>
-          <tbody className=''>
-            {referralsBonus.map(el => <TableElement {...el} />)}
-          </tbody>
-        </table>
-        <div>
-          {paginationValue.map(el => {
-            return <span
-              onClick={() => el !== '...' && handleChangePage(el)}
-              className={`w-5 h-5 lg:w-8 lg:h-8 cursor-pointer flex justify-center items-center ${referralCurrentPage === el ? 'bg-lightYellow text-black rounded-md' : 'text-title'}`}
-            >
-              {el}
-            </span>
-          })}
+      <div className='bg-blue px-4 py-12 sm:p-10 sm:rounded-2xl'>
+        <div className='w-full overflow-x-auto'>
+          <table className='w-full sm:table-fixed border-collapse'>
+            <thead className='text-gold text-4xl font-poppins600'>
+              <tr className='whitespace-nowrap'>
+                <th className='pr-8 sm:pr-0'>Wallet number</th>
+                <th className='px-8 sm:px-0'>Level</th>
+                <th className='px-8 sm:px-0'>Tickets bought</th>
+                <th className='pl-8 sm:pl-0'>Your comission</th>
+              </tr>
+            </thead>
+            <tbody className=''>
+              {referralsBonus.slice((referralCurrentPage - 1) * Config().BONUS_PAGE_ITEMS, (referralCurrentPage - 1) * Config().BONUS_PAGE_ITEMS + Config().BONUS_PAGE_ITEMS).map(el => <TableElement {...el} />)}
+            </tbody>
+          </table>
+        </div>
+        <div className='flex items-center justify-center mt-16 gap-x-11'>
+          <div>
+            <Arrow
+              onClick={() => referralCurrentPage - 1 !== 0 && handleChangePage(referralCurrentPage - 1)}
+              className='pagination__arrow transform -rotate-90 cursor-pointer w-6 h-6' />
+          </div>
+          <div className='flex items-center gap-x-7 justify-center '>
+            {paginationValue.map(el => {
+              return <span
+                onClick={() => el !== '...' && handleChangePage(el)}
+                className={`w-5 h-5 lg:w-8 lg:h-8 cursor-pointer flex justify-center items-center ${referralCurrentPage === el ? 'bg-white text-gold rounded-full' : 'text-title'}`}
+              >
+                {el}
+              </span>
+            })}
+          </div>
+          <div>
+            <Arrow
+              onClick={() => referralCurrentPage + 1 <= pagination && handleChangePage(referralCurrentPage + 1)}
+              className='pagination__arrow transform rotate-90 cursor-pointer w-6 h-6' />
+          </div>
         </div>
       </div>
       <div className='text-center w-full mt-10'>
@@ -101,11 +133,18 @@ export const ReferralBonuses = () => {
 const TableElement = (props) => {
 
   return (
-    <tr className='text-3xl text-center font-poppins400 relative text-description after__tr_line'>
-      <td className='pb-2 pt-10'>{props.wallet}</td>
-      <td>{props.level}</td>
-      <td>{props.ticketsBought}</td>
-      <td >{props.commision} USDT</td>
-    </tr>
+    <>
+      <tr className='text-3xl text-center font-poppins400 relative text-description '>
+        <td className='pb-2 pt-10'>{props.wallet}</td>
+        <td className='pb-2 pt-10'>{props.level}</td>
+        <td className='pb-2 pt-10'>{props.ticketsBought}</td>
+        <td className='pb-2 pt-10'>{props.commision} USDT</td>
+      </tr>
+      <tr className='after__tr_line'>
+        <td colSpan='4'>
+          <span></span>
+        </td>
+      </tr>
+    </>
   )
 }

@@ -12,7 +12,7 @@ export const ResultsBlock = () => {
   }
 
   return (
-    <div className='mt-20 pb-20 -mb-20 max-w-screen-mmx mx-auto'>
+    <div className='mt-20 pb-20 -mb-20 max-w-screen-mmx mx-auto relative z-10'>
       <div className='bg-blue sm:rounded-2xl p-10 w-full sm:w-8/12 mx-auto'>
         <div className='flex items-center justify-between mb-12'>
           <h3 className='font-poppins600 text-gold text-4xl'>Winnings</h3>

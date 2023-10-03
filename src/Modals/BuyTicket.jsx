@@ -28,8 +28,8 @@ export const BuyTicket = () => {
 
   return (
     <div className='fixed w-screen h-screen left-0 top-0 bg-black/75 flex backdrop-blur-md items-center justify-center'>
-      <div className='w-2/3  buy__ticket_modal  rounded-3xl relative text-center py-10 px-8'>
-        <img className='absolute right-4 top-4 cursor-pointer' onClick={handleCloseModal} src={Close} />
+      <div className='w-full mx-4 sm:mx-0 sm:w-2/3  buy__ticket_modal  rounded-3xl relative text-center py-10 px-8'>
+        <img className='absolute w-8 h-8 sm:w-12 sm:h-12 right-4 top-4 cursor-pointer' onClick={handleCloseModal} src={Close} />
         <h1 className='text-title text-4xl font-inter800 mb-8'>Buy Ticket</h1>
         <p className='font-poppins400 text-3xl text-description mb-8'>Select number of tickets to buy</p>
         <div className='flex items-center gap-x-10 justify-center mb-10'>

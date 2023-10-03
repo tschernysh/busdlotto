@@ -2,9 +2,10 @@ import { ToastifyContext } from "applicationContext"
 import { Button } from "Components/Button/Button"
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
 import { Config } from "config"
-import { useContext, useMemo } from "react"
+import { useContext, useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { ReactComponent as Copy } from 'Assets/copy.svg'
 
 
 export const ReferralTitle = () => {
@@ -13,6 +14,7 @@ export const ReferralTitle = () => {
   const { upline } = useSelector(store => store.accountReducer)
   const { defaultReferrer, walletAddress } = useSelector(store => store.applicationReducer)
   const { setToastifyData } = useContext(ToastifyContext)
+  const [showLink, setShowLink] = useState(false)
 
   const referrer = upline || localStorage.getItem('refAddress') || defaultReferrer
 
@@ -21,20 +23,24 @@ export const ReferralTitle = () => {
   }, [walletAddress, upline])
 
   const copyReferralUrlToClipboard = () => {
-    console.log(upline)
-    if (!upline) {
-      setToastifyData({
-        text: 'You need to make first deposit to invite referrals!',
-        description: 'Error'
-      })
-    } else {
-      console.log(referralUrl)
-      navigator.clipboard.writeText(referralUrl)
 
-      setToastifyData({
-        text: 'The referral link has been copied!',
-        description: 'Success'
-      })
+    if (showLink) {
+      if (!upline) {
+        setToastifyData({
+          text: 'You need to make first deposit to invite referrals!',
+          description: 'Error'
+        })
+      } else {
+        console.log(referralUrl)
+        navigator.clipboard.writeText(referralUrl)
+
+        setToastifyData({
+          text: 'The referral link has been copied!',
+          description: 'Success'
+        })
+      }
+    } else {
+      setShowLink(true)
     }
   }
 
@@ -47,8 +53,13 @@ export const ReferralTitle = () => {
       <p className='my-14 font-poppins400 text-4xl text-description w-full sm:w-1/2'>
         To participate, simply connect your wallet, get your unique ID number, referral link, and start inviting others to join and earn.
       </p>
-      <div className=' flex items-center mb-16'>
-        <Button onClick={copyReferralUrlToClipboard}>View Referral Link</Button>
+      <div className='flex items-center mb-16 h-full gap-x-4'>
+        <Button disabled={showLink} onClick={() => !showLink && setShowLink(true)}>{showLink ? `${walletAddress}` : 'View Referral Link'}</Button>
+        {
+          showLink && <div onClick={copyReferralUrlToClipboard} className='bg-gold cursor-pointer h-full rounded-xl p-5'>
+            <Copy className='w-8 h-8' />
+          </div>
+        }
       </div>
     </div>
   )

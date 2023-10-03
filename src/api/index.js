@@ -61,7 +61,7 @@ export const getCurrentTicketIndex = async () => {
 export const getReferralsBonus = async (userAddress) => {
   const query = `
 {
-  referralBonusGranteds(first: 100, where: {referral: ${userAddress || ''}, orderBy: blockTimestamp, orderDirection: desc} ) {
+  referralBonusGranteds(first: 999999, where: {referral: ${userAddress || ''}, orderBy: blockTimestamp, orderDirection: desc} ) {
     buyer
     level
     numberOfTickets

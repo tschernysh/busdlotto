@@ -47,9 +47,13 @@ const Ticket = (props) => {
   return (
     <div className='ticket__block px-5 sm:px-8 pt-20 sm:pt-32 pb-20 sm:pb-40'>
       <img className='mb-8 sm:mb-20' src={TicketLogo} />
-      <div className='ticket__block_field mb-10'></div>
+      <div className='ticket__block_field text-7xl font-poppins600 flex items-center text-gold justify-center mb-10'>
+        <span className='ticket__left_text'>
+          {props.tickets - props.currentTicketIndex >= 0 ? props.tickets - props.currentTicketIndex : 0}
+        </span>
+      </div>
       <p className='font-poppins400 text-description text-4xl'>
-        {props.tickets - props.currentTicketIndex >= 0 ? props.tickets - props.currentTicketIndex : 0} tickets till the next <span className='font-poppins600'>{props.reward} USDT</span> draw
+        tickets till the next <span className='font-poppins600'>{props.reward} USDT</span> draw
       </p>
     </div>
   )

@@ -8,7 +8,7 @@ export const ResultsTitle = () => {
   const walletToShow = walletAddress ? `${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}` : 'Connect wallet first'
 
   return (
-    <div className='pt-20 max-w-screen-mmx mx-auto text-center'>
+    <div className='pt-20 max-w-screen-mmx mx-auto text-center z-10 relative'>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-24 text-white w-full sm:5/12 mx-auto'>
         Check your results
       </h1>
