@@ -192,6 +192,9 @@
   .pagination__arrow:hover path {
     fill: #E2B20B;
   }
+  .menu__gradient{
+    background: linear-gradient(90deg, #0A2C61 2.28%, rgba(10, 10, 10) 99.73%);
+  }
 }
 
   @media screen and (max-width: 640px){

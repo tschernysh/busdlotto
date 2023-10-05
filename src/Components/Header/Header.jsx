@@ -6,7 +6,7 @@ import Burger from 'Assets/burger.png'
 import Tickets from 'Assets/ticketHeader.png'
 import { useSelector } from "react-redux"
 
-export const Header = () => {
+export const Header = (props) => {
 
   const { totalTicketsBought } = useSelector(state => state.accountReducer)
   const location = useLocation()
@@ -29,7 +29,7 @@ export const Header = () => {
         </div>
         <ConnectWallet className='hidden sm:block' isHeader={true} />
         <LanguageSelector className='hidden sm:block' />
-        <div className='flex items-center justify-center sm:hidden'>
+        <div onClick={() => props.setIsMenu(true)} className='flex items-center justify-center sm:hidden'>
           <img src={Burger} />
         </div>
       </div>

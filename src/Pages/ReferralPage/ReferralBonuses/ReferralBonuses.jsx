@@ -4,22 +4,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReactComponent as Arrow } from 'Assets/arrow.svg'
 
-const referralsBonus = [
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 600, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 200, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-  { wallet: '0x213...4124', level: 100, ticketsBought: 100, comission: 10 },
-]
-
 export const ReferralBonuses = () => {
-  const { referralsBonusPages } = useSelector(state => state.accountReducer)
+  const { referralsBonusPages, referralsBonus } = useSelector(state => state.accountReducer)
   const dispatch = useDispatch()
   const [paginationValue, setPaginationValue] = useState([])
   const [referralCurrentPage, setReferralCurrentPage] = useState(1)
@@ -98,28 +84,30 @@ export const ReferralBonuses = () => {
             </tbody>
           </table>
         </div>
-        <div className='flex items-center justify-center mt-16 gap-x-11'>
-          <div>
-            <Arrow
-              onClick={() => referralCurrentPage - 1 !== 0 && handleChangePage(referralCurrentPage - 1)}
-              className='pagination__arrow transform -rotate-90 cursor-pointer w-6 h-6' />
+        {
+          referralsBonus.length && <div className='flex items-center justify-center mt-16 gap-x-11'>
+            <div>
+              <Arrow
+                onClick={() => referralCurrentPage - 1 !== 0 && handleChangePage(referralCurrentPage - 1)}
+                className='pagination__arrow transform -rotate-90 cursor-pointer w-6 h-6' />
+            </div>
+            <div className='flex items-center gap-x-7 justify-center '>
+              {paginationValue.map(el => {
+                return <span
+                  onClick={() => el !== '...' && handleChangePage(el)}
+                  className={`w-5 h-5 lg:w-8 lg:h-8 cursor-pointer flex justify-center items-center ${referralCurrentPage === el ? 'bg-white text-gold rounded-full' : 'text-title'}`}
+                >
+                  {el}
+                </span>
+              })}
+            </div>
+            <div>
+              <Arrow
+                onClick={() => referralCurrentPage + 1 <= pagination && handleChangePage(referralCurrentPage + 1)}
+                className='pagination__arrow transform rotate-90 cursor-pointer w-6 h-6' />
+            </div>
           </div>
-          <div className='flex items-center gap-x-7 justify-center '>
-            {paginationValue.map(el => {
-              return <span
-                onClick={() => el !== '...' && handleChangePage(el)}
-                className={`w-5 h-5 lg:w-8 lg:h-8 cursor-pointer flex justify-center items-center ${referralCurrentPage === el ? 'bg-white text-gold rounded-full' : 'text-title'}`}
-              >
-                {el}
-              </span>
-            })}
-          </div>
-          <div>
-            <Arrow
-              onClick={() => referralCurrentPage + 1 <= pagination && handleChangePage(referralCurrentPage + 1)}
-              className='pagination__arrow transform rotate-90 cursor-pointer w-6 h-6' />
-          </div>
-        </div>
+        }
       </div>
       <div className='text-center w-full mt-10'>
         <p className='font-poppins400 text-4xl text-description mb-8'>Сonnect wallet to check your referrals</p>

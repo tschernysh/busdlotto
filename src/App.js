@@ -15,6 +15,7 @@ import { BuyTicket } from 'Modals/BuyTicket';
 import { BoughtModal } from 'Modals/BoughtModal';
 import { AccountActionCreator } from 'store/reducers/account/action-creator';
 import { Toastify } from 'Components/Toastify/Toastify';
+import { MobileMenu } from 'Components/MobileMenu/MobileMenu';
 
 function App() {
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ function App() {
   const [projectId, setProjectId] = useState()
   const [buyModalShow, setBuyModalShow] = useState(false)
   const [boughtModalShow, setBoughtModalShow] = useState(false)
-
+  const [isMenu, setIsMenu] = useState(false)
 
 
   useMemo(() => {
@@ -142,8 +143,9 @@ function App() {
       <ToastifyContext.Provider value={{ toastData, setToastifyData: setToastData }}>
         <BrowserRouter>
           <WagmiConfig config={wagmiConfig}>
-            <Header />
+            <Header setIsMenu={setIsMenu} />
             <ApplicationRoutes projectId={projectId} ethereumClient={ethereumClient} />
+            {isMenu && <MobileMenu setIsMenu={setIsMenu} />}
             {buyModalShow && <BuyTicket />}
             {boughtModalShow && <BoughtModal />}
             <Toastify />
