@@ -1,4 +1,5 @@
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
+import { Link } from "react-router-dom"
 
 
 export const MainReferral = () => {
@@ -9,7 +10,7 @@ export const MainReferral = () => {
         Tell your friends & <span className='text-gold'>earn extra!</span>
       </h1>
       <div className='fade__block_right font-poppins400 text-3xl sm:text-5xl text-white p-10'>
-        <h3 className='mb-8'>Introducing our fantastic 3-level <span className='text-gold'>referral program</span></h3>
+        <h3 className='mb-8'>Introducing our fantastic 3-level <Link to='/referral' className='text-gold'>referral program</Link></h3>
         <p className='font-poppins600 text-2xl sm:text-3xl text-description mb-5'>
           <span className='text-gold'>1 friend</span> buys a ticket up to the 3rd line → <span className='text-gold'>1 USDT</span> goes to your wallet.
         </p>

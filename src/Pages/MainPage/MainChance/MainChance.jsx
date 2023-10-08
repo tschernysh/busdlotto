@@ -3,6 +3,7 @@ import { ConnectWallet } from 'Components/ConnectWallet/ConnectWallet'
 import { useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { formatNumber } from 'utils/formatNumber';
 
 const carouselOptions = {
   autoPlay: false,
@@ -32,7 +33,7 @@ export const MainChance = () => {
     <div className='mx-auto after__block_line mt-20'>
       <h1 className='text-5xl sm:text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
       <Carousel className='landing__main__carousel' {...carouselOptions}>
-        {tickets.filter(el => el.tickets - currentTicketIndex > 0).map(el => <Ticket {...el} currentTicketIndex={currentTicketIndex} />)}
+        {tickets.map(el => <Ticket {...el} currentTicketIndex={currentTicketIndex} />)}
       </Carousel>
       <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
@@ -53,7 +54,7 @@ const Ticket = (props) => {
         </span>
       </div>
       <p className='font-poppins400 text-description text-4xl'>
-        tickets till the next <span className='font-poppins600'>{props.reward} USDT</span> draw
+        tickets till the next <span className='font-poppins600'>{formatNumber(props.reward)} USDT</span> draw
       </p>
     </div>
   )

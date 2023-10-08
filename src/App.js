@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import 'App.css';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Header } from 'Components/Header/Header';
 import { Footer } from 'Components/Footer/Footer';
 import { ApplicationRoutes } from 'Routes/ApplicationRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { initWagmi } from 'utils/initWagmi';
-import { useContractWrite, WagmiConfig } from 'wagmi';
+import { WagmiConfig } from 'wagmi';
 import { ApplicationActionCreator } from 'store/reducers/application/action-creator';
 import { Config } from 'config';
 import { ConfigContext, ToastifyContext } from 'applicationContext';
@@ -141,7 +141,7 @@ function App() {
   return (
     <ConfigContext.Provider value={{ buyModalShow, setBuyModalShow, boughtModalShow, setBoughtModalShow }}>
       <ToastifyContext.Provider value={{ toastData, setToastifyData: setToastData }}>
-        <BrowserRouter>
+        <HashRouter>
           <WagmiConfig config={wagmiConfig}>
             <Header setIsMenu={setIsMenu} />
             <ApplicationRoutes projectId={projectId} ethereumClient={ethereumClient} />
@@ -151,7 +151,7 @@ function App() {
             <Toastify />
             <Footer />
           </WagmiConfig>
-        </BrowserRouter>
+        </HashRouter>
       </ToastifyContext.Provider>
     </ConfigContext.Provider>
   );

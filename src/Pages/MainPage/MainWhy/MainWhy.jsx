@@ -16,7 +16,7 @@ export const MainWhy = () => {
       <div className='flex flex-col gap-y-36 mb-16'>
 
         <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
-          <div className=' w-full sm:w-3/4'>
+          <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Anonymous</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               <span className='font-poppins600'>CHAINLOTTO</span> winners remain anonymous.<span className='text-gold font-poppins600'> No sign-up or registration </span> is required. You will only need to connect your wallet.
@@ -27,7 +27,7 @@ export const MainWhy = () => {
 
         <div className='fade__block_left overflow-hidden sm:overflow-visible flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
           <img className='absolute left-0 bottom-0 sm:opacity-100 opacity-20' src={Chain} />
-          <div className=' w-full sm:w-3/4 text-left sm:text-right'>
+          <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Transparent</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               The <span className='font-poppins600 text-gold'>Polygon smart contract</span> is public, allowing anyone to view the source code,
@@ -37,7 +37,7 @@ export const MainWhy = () => {
         </div>
 
         <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
-          <div className=' w-full sm:w-3/4'>
+          <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>100K win</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               Great opportunity to win up to <span className='font-poppins600 text-gold'>100K USDT</span>.
@@ -50,7 +50,7 @@ export const MainWhy = () => {
 
         <div className='fade__block_left flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8  sm:px-10 sm:py-10 z-10'>
           <img className='absolute left-0 bottom-0  sm:opacity-100 opacity-20' src={Coins} />
-          <div className=' w-full sm:w-3/4 text-left sm:text-right'>
+          <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Crosschain capability</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               Enjoy the convenience of purchasing lottery tickets with <span className='font-poppins600 text-gold'>any cryptocurrency of your choice</span>.
@@ -61,7 +61,7 @@ export const MainWhy = () => {
         </div>
 
         <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
-          <div className=' w-full sm:w-3/4'>
+          <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>60% goes to the prize pool</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               <span className='font-poppins600'>CHAINLOTTO</span> allocates <span className='font-poppins600 text-gold'>60% of the income to the prize pool</span>,
@@ -74,7 +74,7 @@ export const MainWhy = () => {
 
         <div className='fade__block_left sm:overflow-visible overflow-hidden flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
           <img className='absolute left-0 bottom-0  sm:opacity-100 opacity-20' src={Megaphone} />
-          <div className=' w-full sm:w-3/4 text-left sm:text-right'>
+          <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>3-level referral program</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
               <span className='font-poppins600 text-gold'>Invite your friends</span> to join CHAINLOTTO,

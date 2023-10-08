@@ -31,16 +31,16 @@ const faqTiles = [
     description: `To claim your winnings, go to the "Check your results" tab in the header of the lottery page. Connect your wallet to view the results and proceed to claim your prize. If you are a winner, you will see a button labeled "CLAIM YOUR REWARD NOW!" active. Simply click the button to receive your well-deserved reward. Please ensure that you have a small amount of BNB in your wallet to cover the transaction fees on the blockchain.`
   },
   {
-    title: `How do I know if my wallet participated in the draw?`,
-    description: `Scroll down to the "Winning wallets" section of the web site main menu. There, you can see both the winning wallets and the wallets that participated in the draw. Click on the Polygon Scan to view more details.`
+    title: ``,
+    description: ``
   },
   {
-    title: `Where can I find my referral link?`,
-    description: `To find your referral link, click on the "Referral Program" tab in the header of the lottery page. Once you connect your wallet, you'll see your referral link. You can share it on social media with a single click of a button.`
+    title: ``,
+    description: ``
   },
   {
-    title: `How can I receive my referral bonuses?`,
-    description: `All referral commissions are directly sent to your wallet, and the gas fee for all transactions is covered by the buyer of the lottery ticket. You will receive 1 USDT for every ticket purchased by people in your referral structure, up to the 3rd line.`
+    title: ``,
+    description: ``
   },
 ]
 
@@ -51,14 +51,15 @@ export const MainFaq = () => {
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-24 text-white'>
         FAQ
       </h1>
-      <div className='mb-16 flex flex-col sm:gap-y-8 gap-y-5'>
-        {faqTiles.map(el => <FaqTile {...el} />)}
+      <div className='mb-16'>
+
+        <FaqTile />
       </div>
     </div>
   )
 }
 
-const FaqTile = (props) => {
+const FaqTile = () => {
   const [isOpened, setIsOpened] = useState(false)
 
   return (

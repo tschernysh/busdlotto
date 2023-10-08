@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { formatNumber } from "utils/formatNumber"
 
 
 export const MainWinning = () => {
@@ -18,7 +19,7 @@ export const MainWinning = () => {
       <div className='flex gap-x-8 items-center mb-16 w-full overflow-x-auto'>
         <div className='flex flex-col gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
           {lastWinnings.map(el => {
-            return <WinningTile value={el.amount + ' USDT'} />
+            return <WinningTile value={formatNumber(el.amount) + ' USDT'} />
           })}
         </div>
         <div className='flex flex-col gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
