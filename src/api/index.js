@@ -46,7 +46,7 @@ export const getUserWinnings = async (userAddress) => {
 export const getCurrentTicketIndex = async () => {
   const query = `
 {
-  ticketBoughts(first: 1, orderBy: amount, orderDirection: desc) {
+  ticketBoughts(first: 1, orderBy: timestamp, orderDirection: desc) {
     toTicket
   }
 }`;

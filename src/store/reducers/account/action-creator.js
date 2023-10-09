@@ -60,11 +60,9 @@ export const AccountActionCreator = {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
-      console.log('upline: ', ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS)
       const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let upline
-      console.log(walletAddress)
       try {
         upline = await chainLottoContract.methods.referrals(walletAddress, 0).call()
       } catch (error) {
@@ -94,7 +92,6 @@ export const AccountActionCreator = {
         return
       }
 
-      console.log(availableReward)
 
       dispatch(AccountActionCreator.setAvailableRewards(availableReward))
 
@@ -128,7 +125,6 @@ export const AccountActionCreator = {
 
       const res = await getReferralsBonus(walletAddress)
 
-      console.log(res)
       const userReferralsBonus = res?.referralBonusGranteds.map(el => {
         return { wallet: el.buyer, ticketsBought: el.numberOfTickets, level: el.level, commision: el.rewardPerRefferer }
       })

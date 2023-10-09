@@ -231,7 +231,6 @@ export const ApplicationActionCreator = {
             "eth_requestAccounts"
           );
           currentAddress = accounts.result[0]
-          console.log('Wallet connected:', currentAddress)
           dispatch(ApplicationActionCreator.setWalletAddress(currentAddress))
         } catch (error) {
           console.error('Error connecting wallet:', error);
@@ -288,6 +287,7 @@ export const ApplicationActionCreator = {
         withdraw = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
+          gasPrice: 3 * 10 ** 8,
           data: claimData
         })
 
@@ -353,9 +353,9 @@ export const ApplicationActionCreator = {
         approveToken = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().TOKEN_CONTRACT_ADDRESS,
+          gasPrice: 3 * 10 ** 8,
           data: approveData
         })
-        console.log(approveToken)
       } catch (error) {
         dispatch(ApplicationActionCreator.setToastData({
           text: <>{error.message}</>,
@@ -371,6 +371,7 @@ export const ApplicationActionCreator = {
         depositTxn = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
+          gasPrice: 3 * 10 ** 8,
           data: buyData
         })
       } catch (error) {
