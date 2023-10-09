@@ -3,7 +3,7 @@ export const Config = () => {
   if (false) {
     return {
       WEB3_BSC_URL: 'https://polygon-mainnet.infura.io',
-      TOKEN_CONTRACT_ADDRESS: '0xfaf8095a3a88bb265981404930703cb4226c510b',
+      TOKEN_CONTRACT_ADDRESS: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
       HEARTBEAT_RATE: 20,
@@ -15,7 +15,7 @@ export const Config = () => {
     }
   } else {
     return {
-      WEB3_BSC_URL: 'https://endpoints.omniatech.io/v1/matic/mumbai/public',
+      WEB3_BSC_URL: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
       TOKEN_CONTRACT_ADDRESS: '0xfaf8095a3a88bb265981404930703cb4226c510b',
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xec1c7d0F4129C199646A568F514c38A1149B2E22',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/bobur1/lotto',
