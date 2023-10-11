@@ -37,7 +37,7 @@ export const MainChance = () => {
       </Carousel>
       <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
-        <ConnectWallet />
+        <Link to='results' className='w-full button__focus whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-2 sm:px-24'>check your results</Link>
       </div>
     </div>
   )

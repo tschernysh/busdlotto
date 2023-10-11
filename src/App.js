@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch()
   const {
     walletAddress, isNeedToUpdate, notCorrectChain,
-    toastData } = useSelector(state => state.applicationReducer)
+    toastData, isWithdrawTransaction } = useSelector(state => state.applicationReducer)
   const [seconds, setSeconds] = useState(0)
   const [wagmiConfig, setWagmiConfig] = useState()
   const [ethereumClient, setEthereumClient] = useState()
@@ -84,7 +84,9 @@ function App() {
   useEffect(() => {
     if (isNeedToUpdate) {
       setBuyModalShow(false)
-      setBoughtModalShow(true)
+      if (!isWithdrawTransaction) {
+        setBoughtModalShow(true)
+      }
       if (!!walletAddress) {
         dispatch(AccountActionCreator.getUpline())
         dispatch(ApplicationActionCreator.getAccountMaticBalance())
@@ -94,6 +96,7 @@ function App() {
         dispatch(AccountActionCreator.getAvailableRewards())
       }
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(false))
+      dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
     }
   }, [isNeedToUpdate])
 

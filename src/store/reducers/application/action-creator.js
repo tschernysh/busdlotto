@@ -308,9 +308,7 @@ export const ApplicationActionCreator = {
         return
       }
 
-
       dispatch(ApplicationActionCreator.setIsNeedToUpdate(true))
-      dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
 
     },
   buyTicket:
