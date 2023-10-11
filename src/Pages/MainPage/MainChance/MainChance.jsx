@@ -50,7 +50,7 @@ const Ticket = (props) => {
       <img className='mb-8 sm:mb-20' src={TicketLogo} />
       <div className='ticket__block_field text-7xl font-poppins600 flex items-center text-gold justify-center mb-10'>
         <span className='ticket__left_text'>
-          {props.tickets - props.currentTicketIndex >= 0 ? props.tickets - props.currentTicketIndex : 0}
+          {props.tickets - props.currentTicketIndex % props.tickets}
         </span>
       </div>
       <p className='font-poppins400 text-description text-4xl'>

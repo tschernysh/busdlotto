@@ -11,6 +11,9 @@ export const MainPage = () => {
 
   const { ref } = useParams()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     console.log(ref)

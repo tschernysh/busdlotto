@@ -9,7 +9,7 @@ const api = axios.create({
 export const getLastWinners = async () => {
   const query = `
 {
-  wonDrawns(first: 5) {
+  wonDrawns(first: 5, orderBy: timestamp, orderDirection: desc) {
     id
     amount
     winner

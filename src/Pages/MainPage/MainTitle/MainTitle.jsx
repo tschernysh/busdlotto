@@ -15,7 +15,7 @@ export const MainTitle = () => {
       <p className='sm:my-14 my-8 font-poppins400 text-3xl sm:text-4xl text-description sm:w-1/2'>
         Experience a fully automated smart-contract DeFi lottery with an 3-level referral program
       </p>
-      <p className='text-gold text-4xl sm:text-6xl font-poppins400 mb-10 sm:mb-16'>
+      <p className='text-gold text-4xl sm:text-6xl font-poppins600 mb-10 sm:mb-16'>
         1 ticket — only <span className='font-poppins600'>10 USD</span>
       </p>
       <div className='gap-x-8 flex flex-col gap-y-5 sm:flex-row  items-center mb-16'>

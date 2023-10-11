@@ -32,6 +32,7 @@ export const ApplicationRoutes = (props) => {
     }
   }, [address, data])
 
+
   useEffect(() => {
     if (isDisconnected) {
       disconnectWallet()

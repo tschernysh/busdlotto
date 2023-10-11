@@ -47,8 +47,8 @@ const faqTiles = [
 export const MainFaq = () => {
 
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto px-4 sm:px-0 after__block_line'>
-      <h1 className='font-inter800 text-5xl sm:text-7xl mb-24 text-white'>
+    <div className='mt-10 sm:mt-20 max-w-screen-mmx mx-auto px-4 sm:px-0 after__block_line'>
+      <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 text-white'>
         FAQ
       </h1>
       <div className='mb-16 flex flex-col sm:gap-y-8 gap-y-5'>

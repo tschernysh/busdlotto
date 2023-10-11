@@ -10,7 +10,7 @@ export const WorkTitle = () => {
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto '>
       <h1 className='font-inter800 text-5xl px-4 sm:px-0 sm:text-7xl mb-10 text-white'>
-        Tell your friends & <span>earn extra!</span>
+        How it works
       </h1>
       <div className='font-poppins400 text-description text-3xl p-10 mb-16 fade__block_right'>
         CHAINLOTTO is a cryptocurrency lottery with a 3-level referral program on the Polygon Network.

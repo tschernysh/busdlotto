@@ -18,6 +18,8 @@ export const ReferralTitle = () => {
 
   const referrer = upline || localStorage.getItem('refAddress') || defaultReferrer
 
+  const isMobile = window.innerWidth < 640
+
   const referralUrl = useMemo(() => {
     return `${baseUrl}${walletAddress}`
   }, [walletAddress, upline])
@@ -51,13 +53,13 @@ export const ReferralTitle = () => {
         <span className='leading-[1.1em] '>Program</span>
       </h1>
       <p className='my-14 font-poppins400 text-4xl text-description w-full sm:w-1/2'>
-        To participate, simply connect your wallet, get your unique ID number, referral link, and start inviting others to <span className='text-gold'>join and earn</span>.
+        To participate, simply connect your wallet, get your unique ID number, referral link, and start inviting others to <span className='text-gold font-poppins600'>join and earn</span>.
       </p>
       <div className='flex items-center mb-16 h-full gap-x-4'>
-        <Button disabled={showLink} onClick={() => !showLink && setShowLink(true)}>{showLink ? `${walletAddress}` : 'View Referral Link'}</Button>
+        <Button className='' disabled={showLink} onClick={() => !showLink && setShowLink(true)}>{showLink ? `${isMobile ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-6)}` : walletAddress}` : 'View Referral Link'}</Button>
         {
-          showLink && <div onClick={copyReferralUrlToClipboard} className='bg-gold cursor-pointer h-full rounded-xl p-5'>
-            <Copy className='w-8 h-8' />
+          showLink && <div onClick={copyReferralUrlToClipboard} className='bg-gold cursor-pointer h-full rounded-xl p-4 sm:p-5'>
+            <Copy className='sm:w-8 sm:h-8 w-4 h-4' />
           </div>
         }
       </div>

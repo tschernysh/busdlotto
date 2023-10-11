@@ -14,7 +14,7 @@ export const ResultsTitle = () => {
       </h1>
       <div className='w-full px-4 sm:px-0 sm:w-1/2 mx-auto text-center'>
         <img className='mx-auto' src={Crown} />
-        <div className='font-poppins400 rounded-2xl text-xl sm:text-3xl text-description py-5 px-4 sm:py-8 sm:px-10 bg-blue'>Your wallet address: <span className='text-gold'>{walletToShow}</span></div>
+        <div className='font-poppins400 rounded-2xl text-xl sm:text-3xl text-description py-5 px-4 sm:py-8 sm:px-10 bg-blue'>Your wallet address: <span className='text-gold font-poppins600'>{walletToShow}</span></div>
       </div>
     </div>
   )

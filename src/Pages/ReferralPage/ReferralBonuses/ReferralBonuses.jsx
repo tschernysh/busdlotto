@@ -66,12 +66,12 @@ export const ReferralBonuses = () => {
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto '>
       <h1 className='font-inter800 text-5xl sm:text-7xl px-4 sm:px-0 mb-24 text-white'>
-        Experience the benefits
+        Check your referral bonuses
       </h1>
       <div className='bg-blue px-4 py-12 sm:p-10 sm:rounded-2xl'>
         <div className='w-full overflow-x-auto'>
           <table className='w-full sm:table-fixed border-collapse'>
-            <thead className='text-gold text-4xl font-poppins600'>
+            <thead className='text-gold text-2xl sm:text-4xl font-poppins600'>
               <tr className='whitespace-nowrap'>
                 <th className='pr-8 sm:pr-0'>Wallet number</th>
                 <th className='px-8 sm:px-0'>Level</th>
@@ -110,7 +110,7 @@ export const ReferralBonuses = () => {
         }
       </div>
       <div className='text-center w-full mt-10'>
-        <p className='font-poppins400 text-4xl text-description mb-8'>Сonnect wallet to check your referrals</p>
+        <p className='font-poppins400 text-2xl sm:text-4xl text-description mb-8'>Сonnect wallet to check your referrals</p>
         <ConnectWallet />
       </div>
 
@@ -122,7 +122,7 @@ const TableElement = (props) => {
 
   return (
     <>
-      <tr className='text-3xl text-center font-poppins400 relative text-description '>
+      <tr className='text-xl sm:text-3xl text-center font-poppins400 relative text-description '>
         <td className='pb-2 pt-10'>{props.wallet}</td>
         <td className='pb-2 pt-10'>{props.level}</td>
         <td className='pb-2 pt-10'>{props.ticketsBought}</td>

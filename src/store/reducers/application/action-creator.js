@@ -156,8 +156,6 @@ export const ApplicationActionCreator = {
         return
       }
 
-      alert(tokenBalance)
-
       dispatch(ApplicationActionCreator.setTokenBalance(tokenBalance))
 
     },
@@ -326,6 +324,13 @@ export const ApplicationActionCreator = {
       const ticketPriceUsdt = store().applicationReducer.ticketPriceUsdt
       const amount = store().applicationReducer.buyTicketsAmount
 
+      if (tokenBalance < amount * ticketPriceUsdt) {
+        dispatch(ApplicationActionCreator.setToastData({
+          text: <>Your wallet balance is too low for the transaction.</>,
+          description: <>Please top it up!</>
+        }))
+        return
+      }
 
       dispatch(ApplicationActionCreator.setIsDepositTransaction(true))
 
@@ -345,7 +350,6 @@ export const ApplicationActionCreator = {
       const approveData = tokenContract.methods.approve(Config().CHAIN_LOTTO_CONTRACT_ADDRESS, amountToSend).encodeABI()
 
       let approveToken
-
 
       try {
         approveToken = await web3.eth.sendTransaction({

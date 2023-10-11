@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      brightness: {
+        20: '.20',
+      },
       fontSize: {
         'c': '6.25rem',
       },

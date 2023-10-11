@@ -9,39 +9,39 @@ export const ReferralBenefits = () => {
         </h1>
         <p className='font-poppins400 text-description text-2xl mb-16'>
           As a valued participant of CHAINLOTTO, we have exciting rewards waiting for you.
-          By <span className='text-gold'>referring others</span> to join the lottery, you can <span className='text-gold'>earn referral commissions</span> and
+          By <span className='text-gold font-poppins600'>referring others</span> to join the lottery, you can <span className='text-gold font-poppins600'>earn referral commissions</span> and
           maximize your chances of winning.
         </p>
       </div>
       <div className='flex flex-col gap-y-24 sm:gap-y-10'>
         <div className='fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2'>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
-            font-poppins600 sm:text-5xl text-gold
+            sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28  flex items-center 
             justify-center transform -translate-x-1/2 -translate-y-1/2'>Lvl 1</div>
           <p className='font-poppins400 text-description text-3xl'>
             For each person who registers directly using your referral link,
-            you will <span className='text-gold'>earn 1 USDT</span> for each lottery ticket they purchase.
+            you will <span className='text-gold font-poppins600'>earn 1 USDT</span> for each lottery ticket they purchase.
           </p>
         </div>
         <div className='fade__block_right self-end relative  sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2'>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
-            font-poppins600 sm:text-5xl text-gold
+            sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28 flex items-center 
             justify-center transform -translate-x-1/2 -translate-y-1/2'>Lvl 2</div>
           <p className='font-poppins400 text-description text-3xl'>
             If someone registers through the referral link of another person who is directly
-            registered under you (second line), you will <span className='text-gold'>earn an additional 1 USDT</span> for each lottery ticket they purchase.
+            registered under you (second line), you will <span className='text-gold font-poppins600'>earn an additional 1 USDT</span> for each lottery ticket they purchase.
           </p>
         </div>
-        <div className='fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-16 pb-20 w-full sm:w-1/2'>
+        <div className='fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-16 pb-8 w-full sm:w-1/2'>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
-            font-poppins600 sm:text-5xl text-gold
+            sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28 flex items-center 
             justify-center transform -translate-x-1/2 -translate-y-1/2'>Lvl 3</div>
           <p className='font-poppins400 text-description text-3xl'>
             If someone registers using the referral link of another person who is registered on your third line
-            , you will <span className='text-gold'>earn an additional 1 USDT</span> for each lottery ticket they purchase.
+            , you will <span className='text-gold font-poppins600'>earn an additional 1 USDT</span> for each lottery ticket they purchase.
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export const ReferralBenefits = () => {
         <p className='mt-8 text-description font-poppins400 text-xl'>Please note that all referral commissions are sent directly to your wallet,
           and the gas fee for all transactions is paid by the buyer of the lottery ticket.</p>
         <p className='font-poppins400 text-description text-4xl w-full sm:w-7/12 mt-8'>
-          <span className='text-gold'>Start inviting</span> others to join now and <span className='text-gold'>unlock the full potential</span> of our referral program!
+          <span className='text-gold font-poppins600'>Start inviting</span> others to join now and <span className='text-gold font-poppins600'>unlock the full potential</span> of our referral program!
         </p>
       </div>
     </div>

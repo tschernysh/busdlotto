@@ -4,9 +4,14 @@ import Serpantin from 'Assets/results/serpantin.png'
 import LightsLeft from 'Assets/results/lightsLeft.png'
 import LightsRight from 'Assets/results/lightsRight.png'
 import Coins from 'Assets/results/coins.png'
+import { useEffect } from "react"
 
 
 export const ResultsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className='relative'>

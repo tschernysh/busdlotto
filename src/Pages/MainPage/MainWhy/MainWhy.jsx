@@ -10,10 +10,10 @@ export const MainWhy = () => {
 
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto after__block_line'>
-      <h1 className='font-inter800 text-5xl sm:text-7xl mb-24 px-4 sm:px-0 text-white'>
+      <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 px-4 sm:px-0 text-white'>
         Why to play <span className='font-poppins600 text-gold'>CHAINLOTTO?</span>
       </h1>
-      <div className='flex flex-col gap-y-36 mb-16'>
+      <div className='flex flex-col gap-y-10 sm:gap-y-36 mb-16'>
 
         <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
           <div className=' w-full sm:w-8/12'>

@@ -32,7 +32,7 @@
   font-weight: 400;
 }
 
-@layer  components {
+@layer components {
   .main__background {
     background-image: url(Assets/main.png);
     background-position: 90% -15vh;
@@ -47,12 +47,12 @@
     height: 1px;
     background: linear-gradient(270deg, rgba(12, 65, 167, 0.00) 0%, #0C53A7 50.69%, rgba(12, 65, 167, 0.00) 100%);
   }
-  .after__tr_line{
+  .after__tr_line {
     width: 100%;
     height: 1px;
     background: linear-gradient(270deg, rgba(12, 65, 167, 0.00) 0%, #0C53A7 50.69%, rgba(12, 65, 167, 0.00) 100%);
   }
-  .after__results_line::after{
+  .after__results_line::after {
     content: '';
     width: 100%;
     position: absolute;
@@ -78,29 +78,29 @@
     border-radius: 20px;
     background: linear-gradient(270deg, #0A2C61 0%, rgba(15, 71, 137, 0.00) 100%);
   }
-  .work__background{
+  .work__background {
     background-image: url(Assets/work/coins.png);
     background-repeat: no-repeat;
     background-size: fit;
     background-position: center;
   } 
-  .referral__background{
+  .referral__background {
     background-image: url(Assets/referral/coins.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 90% -35vh ;
   }
-  .result__background{
+  .result__background {
     background-image: url(Assets/results/coins.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
   }
-  .winning__block_border{
+  .winning__block_border {
     border-radius: 20px;
     border: 15px solid rgba(11, 59, 154, 0.61);
   }
-  .ticket__block{
+  .ticket__block {
     width: 640px;
     height: 772px;
     box-shadow: inset 0 0 0 4px #D1AE55;
@@ -143,7 +143,7 @@
     border: 4px solid var(--Yellow1, #D1AE55);
     z-index: 10;
   }
-  .ticket__left_text{
+  .ticket__left_text {
     background: linear-gradient(180deg, #F0CC70 21.05%, #DDAE30 68.67%, #D29B22 80.76%, #DD9B12 92.84%, #C3730E 105.47%);
     background-clip: text;
 -webkit-text-stroke: 1px #fff;
@@ -156,19 +156,19 @@
     backdrop-filter: blur(18px);
     border-radius: 100%;
   }
-  .landing__main__carousel{
+  .landing__main__carousel {
     display: flex;
   }
-  .buy__ticket_modal{
+  .buy__ticket_modal {
     border-radius: 20px;
     background: linear-gradient(70deg, #0F4789 1.81%, rgba(15, 71, 137, 0.00) 117.31%);
   }
-  .bought__ticket_modal{
+  .bought__ticket_modal {
     border-radius: 20px;
     border: 4px solid var(--22, #FFCB12);
     background: linear-gradient(70deg, #0F4789 1.81%, rgba(15, 71, 137, 0.00) 117.31%);
   }
-  .bought__ticket_bg::after{
+  .bought__ticket_bg::after {
     background-image: url(Assets/congratulations.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -192,10 +192,10 @@
   .pagination__arrow:hover path {
     fill: #E2B20B;
   }
-  .menu__gradient{
+  .menu__gradient {
     background: linear-gradient(90deg, #0A2C61 2.28%, rgba(10, 10, 10) 99.73%);
   }
-  .button__focus{
+  .button__focus {
     text-shadow: 0px 4px 4px rgba(43, 42, 27, 0.50);
   }
   .button__focus:active {
@@ -204,8 +204,8 @@
   }
 }
 
-  @media screen and (max-width: 640px){
-    .main__background{
+  @media screen and (max-width: 640px) {
+    .main__background {
       background-size: 180% ;
       background-position: -80vw -100px;
     }
@@ -215,20 +215,20 @@
     .fade__block_left {
       border-radius: 0px;
     }
-    .ticket__block{
+    .ticket__block {
       width: 100%;
       height: 100%;
     }
     .ticket__block_field {
       height: 67px;
     }
-  .referral__background{
+  .referral__background {
     background-image: url(Assets/referral/presentMobile.png);
     background-repeat: no-repeat;
     background-size: auto;
     background-position: 0 -10vh;
   }
-  }
+}
 
 body {
   margin: 0;

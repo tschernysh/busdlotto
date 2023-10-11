@@ -14,7 +14,7 @@ export const ConnectWallet = (props) => {
     : 'font-inter600 text-title text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-24'
 
   return (
-    <button onClick={open} className={`${styles} ${props.className}  `}>
+    <button onClick={open} className={`${styles} ${props.className}  button__focus`}>
       {walletAddress ? walletAddress.slice(0, 6) + '...' + walletAddress.slice(-6) : 'Connect Wallet'}
     </button >
   )
