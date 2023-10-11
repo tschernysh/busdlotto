@@ -19,7 +19,7 @@ export const MainReferral = () => {
         </p>
       </div>
       <div className='w-full text-center mt-10 mb-14'>
-        <ConnectWallet />
+        <Link to='referral' className='w-full button__focus whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-2 sm:px-24'>view your referral link</Link>
       </div>
     </div>
   )

@@ -98,7 +98,13 @@ function App() {
   }, [isNeedToUpdate])
 
   useEffect(() => {
-    if (notCorrectChain) alert('Connect to another supported chain')
+    if (notCorrectChain) {
+      dispatch(ApplicationActionCreator.setToastData({
+        text: <>Change your chain to a correct one.</>,
+        description: <>Not correct chain.</>
+      }))
+
+    }
     if (!!walletAddress && !notCorrectChain) {
       setSeconds(0)
     }
@@ -113,7 +119,8 @@ function App() {
 
     const handleChainChanged = (chainId) => {
       const newChainId = Number(chainId)
-      if (chainId !== Config().CHAIN_ID) {
+      console.log(newChainId, Config().CHAIN_ID)
+      if (newChainId === Config().CHAIN_ID) {
         dispatch(ApplicationActionCreator.setNotCorrectChain(false))
       } else dispatch(ApplicationActionCreator.setNotCorrectChain(true))
     }

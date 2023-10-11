@@ -4,10 +4,10 @@ export const ReferralBenefits = () => {
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto '>
       <div className='px-4 sm:px-0'>
-        <h1 className='font-inter800 text-5xl sm:text-7xl mb-5 sm:mb-24 text-white'>
+        <h1 className='font-inter800 text-5xl sm:text-7xl mb-5 text-right sm:mb-24 text-white'>
           Experience the benefits
         </h1>
-        <p className='font-poppins400 text-description text-2xl mb-16'>
+        <p className='font-poppins400 text-description text-right sm:w-7/12 ml-auto text-2xl mb-16'>
           As a valued participant of CHAINLOTTO, we have exciting rewards waiting for you.
           By <span className='text-gold font-poppins600'>referring others</span> to join the lottery, you can <span className='text-gold font-poppins600'>earn referral commissions</span> and
           maximize your chances of winning.

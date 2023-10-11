@@ -20,7 +20,7 @@ export const MainTitle = () => {
       </p>
       <div className='gap-x-8 flex flex-col gap-y-5 sm:flex-row  items-center mb-16'>
         <Button onClick={() => setBuyModalShow(true)}>buy ticket now!</Button>
-        <Link to='results' className='w-full whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-blueDisabled uppercase rounded-xl leading-3 px-2 sm:px-24'>check your results</Link>
+        <Link to='results' className='w-full button__focus whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-blueDisabled uppercase rounded-xl leading-3 px-2 sm:px-24'>check your results</Link>
       </div>
     </div>
 
