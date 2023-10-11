@@ -4,8 +4,12 @@ import Hand from 'Assets/work/hand.png'
 import Wallet from 'Assets/work/wallet.png'
 import Star from 'Assets/work/star.png'
 import { Button } from 'Components/Button/Button'
+import { useContext } from 'react'
+import { ConfigContext } from 'applicationContext'
 
 export const WorkTitle = () => {
+
+  const { setBuyModalShow } = useContext(ConfigContext)
 
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto '>
@@ -47,7 +51,7 @@ export const WorkTitle = () => {
         </div>
       </div>
       <div className='mx-auto w-full text-center px-4 sm:px-0'>
-        <Button>BUY TICKET</Button>
+        <Button onClick={() => setBuyModalShow(true)} >BUY TICKET</Button>
       </div>
     </div>
   )
