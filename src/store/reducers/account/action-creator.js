@@ -121,12 +121,17 @@ export const AccountActionCreator = {
     },
   getReferralsBonus:
     () => async (dispatch, store) => {
-      const walletAddress = store()
+      const walletRPC = store().applicationReducer.walletRPC
+      const web3 = await initWeb3(walletRPC)
+      const walletAddress = store().applicationReducer.walletAddress
 
       const res = await getReferralsBonus(walletAddress)
 
+      console.log(res)
+
       const userReferralsBonus = res?.referralBonusGranteds.map(el => {
-        return { wallet: el.buyer, ticketsBought: el.numberOfTickets, level: el.level, commision: el.rewardPerRefferer }
+        const newCommision = +web3.utils.fromWei(el.rewardPerRefferer, 'ether')
+        return { wallet: el.buyer, ticketsBought: el.numberOfTickets, level: el.level, commision: newCommision }
       })
 
       if (userReferralsBonus) {

@@ -32,7 +32,7 @@ export const MainWinning = () => {
         <div className='flex flex-col relative gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
           <img src={Map2} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
-            return <WinningTile value={new Date(el.time).toLocaleTimeString()} />
+            return <WinningTile value={new Date(el.time * 1000).toLocaleTimeString()} />
           })}
         </div>
         <div className='flex flex-col relative gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>

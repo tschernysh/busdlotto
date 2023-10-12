@@ -123,7 +123,7 @@ const TableElement = (props) => {
   return (
     <>
       <tr className='text-xl sm:text-3xl text-center font-poppins400 relative text-description '>
-        <td className='pb-2 pt-10'>{props.wallet}</td>
+        <td className='pb-2 pt-10'>{props.wallet.slice(0, 6) + '...' + props.wallet.slice(-6)}</td>
         <td className='pb-2 pt-10'>{props.level}</td>
         <td className='pb-2 pt-10'>{props.ticketsBought}</td>
         <td className='pb-2 pt-10'>{props.commision} USDT</td>

@@ -20,7 +20,7 @@ export const getLastWinners = async () => {
   }
 }`;
 
-  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+  const res = await api.post(Config().THEGRAPH_URL, {
     query: query
   })
 
@@ -36,7 +36,7 @@ export const getUserWinnings = async (userAddress) => {
   }
 }`;
 
-  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+  const res = await api.post(Config().THEGRAPH_URL, {
     query: query
   })
 
@@ -51,7 +51,7 @@ export const getCurrentTicketIndex = async () => {
   }
 }`;
 
-  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+  const res = await api.post(Config().THEGRAPH_URL, {
     query: query
   })
 
@@ -61,7 +61,7 @@ export const getCurrentTicketIndex = async () => {
 export const getReferralsBonus = async (userAddress) => {
   const query = `
 {
-  referralBonusGranteds(first: 999999, where: {referral: ${userAddress || ''}, orderBy: blockTimestamp, orderDirection: desc} ) {
+  referralBonusGranteds(first: 1000, where: {referral: "${userAddress}"} ) {
     buyer
     level
     numberOfTickets
@@ -70,7 +70,7 @@ export const getReferralsBonus = async (userAddress) => {
 }
 `;
 
-  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+  const res = await api.post(Config().THEGRAPH_URL, {
     query: query
   })
 
@@ -86,7 +86,7 @@ export const getTotalUserTicketsBought = async (userAddress) => {
     }
   `
 
-  const res = await api.post('https://api.thegraph.com/subgraphs/name/bobur1/lotto', {
+  const res = await api.post(Config().THEGRAPH_URL, {
     query: query
   })
 
