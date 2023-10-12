@@ -15,7 +15,7 @@ export const MainReferral = () => {
           <span className='text-gold font-poppins600'>1 friend</span> buys a ticket up to the 3rd line → <span className='text-gold font-poppins600'>1 USDT</span> goes to your wallet.
         </p>
         <p className='font-poppins600 text-2xl sm:text-3xl text-description'>
-          Connect your wallet to receive your referral link and start sharing it.
+          Buy at least one ticket, receive your referral link and start sharing it
         </p>
       </div>
       <div className='w-full text-center mt-10 mb-14'>

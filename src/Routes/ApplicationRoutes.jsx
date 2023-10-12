@@ -3,24 +3,34 @@ import { MainPage } from "Pages/MainPage/MainPage"
 import { WorkPage } from "Pages/WorkPage/WorkPage"
 import { ReferralPage } from "Pages/ReferralPage/ReferralPage"
 import { ResultsPage } from "Pages/ResultsPage/ResultsPage"
-import { useAccount, useWalletClient } from "wagmi"
-import { useDispatch } from "react-redux"
+import { useAccount, useSwitchNetwork, useWalletClient } from "wagmi"
+import { useDispatch, useSelector } from "react-redux"
 import { AccountActionCreator } from "store/reducers/account/action-creator"
 import { ApplicationActionCreator } from "store/reducers/application/action-creator"
 import { useEffect } from "react"
 import { Web3Modal } from "@web3modal/react"
+import { Config } from "config"
 
 
 export const ApplicationRoutes = (props) => {
 
   const { connector: activeConnector, address, isConnecting, isDisconnected } = useAccount()
   const { data, isError } = useWalletClient()
+  const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork()
+  const { notCorrectChain } = useSelector(state => state.applicationReducer)
   const dispatch = useDispatch()
 
   const disconnectWallet = () => {
     dispatch(AccountActionCreator.resetUserInfo())
     dispatch(ApplicationActionCreator.setWalletAddress(null))
   }
+
+  useEffect(() => {
+    if (notCorrectChain) {
+      switchNetwork?.(Config().CHAIN_ID)
+    }
+  }, [notCorrectChain])
+
 
   useEffect(() => {
     console.log(address, data)

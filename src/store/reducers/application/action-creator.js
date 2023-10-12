@@ -5,6 +5,7 @@ import ERC20 from 'contracts/ERC20.json'
 import ChainLotto from 'contracts/ChainLotto.json'
 import { Config } from 'config';
 import { getCurrentTicketIndex, getLastWinners } from 'api';
+import { AccountActionCreator } from '../account/action-creator';
 
 export const ApplicationActionCreator = {
   setWalletAddress: (walletAddress) => ({
@@ -67,14 +68,20 @@ export const ApplicationActionCreator = {
     type: applicationTypes().SET_CURRENT_TICKET_INDEX,
     payload: currentTicketIndex
   }),
+  setCurrentTicketIndexLoader: (loader) => ({
+    type: applicationTypes().SET_CURRENT_TICKET_INDEX,
+    payload: loader
+  }),
   getCurrentTicketIndex:
     () => async (dispatch, store) => {
 
+      dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(true))
 
       const res = await getCurrentTicketIndex()
 
       dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0].toTicket))
 
+      dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(true))
     },
   getLastWinners:
     () => async (dispatch, store) => {
@@ -278,7 +285,19 @@ export const ApplicationActionCreator = {
       const walletRPC = store().applicationReducer.walletRPC
       const web3 = await initWeb3(walletRPC)
       const walletAddress = store().applicationReducer.walletAddress
+      const notCorrectChain = store().applicationReducer.notCorrectChain
+
+
+      if (notCorrectChain) {
+        dispatch(ApplicationActionCreator.setToastData({
+          text: <>Change your chain to a correct one.</>,
+          description: <>Not correct chain.</>
+        }))
+        return
+      }
+
       dispatch(ApplicationActionCreator.setIsWithdrawTransaction(true))
+
       const chainLottoContract = new web3.eth.Contract(ChainLotto.abi, Config().CHAIN_LOTTO_CONTRACT_ADDRESS);
 
       let withdraw
@@ -321,6 +340,16 @@ export const ApplicationActionCreator = {
       const tokenBalance = store().applicationReducer.tokenBalance
       const ticketPriceUsdt = store().applicationReducer.ticketPriceUsdt
       const amount = store().applicationReducer.buyTicketsAmount
+      const notCorrectChain = store().applicationReducer.notCorrectChain
+
+
+      if (notCorrectChain) {
+        dispatch(ApplicationActionCreator.setToastData({
+          text: <>Change your chain to a correct one.</>,
+          description: <>Not correct chain.</>
+        }))
+        return
+      }
 
       if (tokenBalance < amount * ticketPriceUsdt) {
         dispatch(ApplicationActionCreator.setToastData({

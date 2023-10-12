@@ -12,6 +12,7 @@ export const initialState = {
   isDepositTransaction: false,
   isWithdrawTransaction: false,
   notCorrectChain: false,
+  currentTicketIndexLoader: false,
   lastWinnings: [],
   userWinnings: {
     40: 0,
@@ -57,6 +58,8 @@ export default function applicationReducer(
       return { ...state, lastWinnings: action.payload }
     case applicationTypes().SET_CURRENT_TICKET_INDEX:
       return { ...state, currentTicketIndex: action.payload }
+    case applicationTypes().SET_CURRENT_TICKET_INDEX_LOADER:
+      return { ...state, currentTicketIndexLoader: action.payload }
     default:
       return state
   }

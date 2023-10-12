@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from 'react-router-dom';
 import { formatNumber } from 'utils/formatNumber';
+import { ReactComponent as Loader } from 'Assets/loader.svg'
 
 const carouselOptions = {
   autoPlay: false,
@@ -46,12 +47,18 @@ export const MainChance = () => {
 
 const Ticket = (props) => {
 
+  const { currentTicketIndexLoader } = useSelector(state => state.applicationReducer)
+
   return (
     <div className='ticket__block px-5 sm:px-8 pt-20 sm:pt-32 pb-20 sm:pb-40'>
       <img className='mb-8 sm:mb-20' src={TicketLogo} />
       <div className='ticket__block_field text-7xl font-poppins600 flex items-center text-gold justify-center mb-10'>
         <span className='ticket__left_text'>
-          {props.tickets - props.currentTicketIndex % props.tickets}
+          {
+            currentTicketIndexLoader
+              ? <Loader />
+              : props.tickets - props.currentTicketIndex % props.tickets
+          }
         </span>
       </div>
       <p className='font-poppins400 text-description text-4xl'>
