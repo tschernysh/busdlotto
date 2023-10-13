@@ -69,7 +69,7 @@ export const ApplicationActionCreator = {
     payload: currentTicketIndex
   }),
   setCurrentTicketIndexLoader: (loader) => ({
-    type: applicationTypes().SET_CURRENT_TICKET_INDEX,
+    type: applicationTypes().SET_CURRENT_TICKET_INDEX_LOADER,
     payload: loader
   }),
   getCurrentTicketIndex:
@@ -81,7 +81,7 @@ export const ApplicationActionCreator = {
 
       dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0].toTicket))
 
-      dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(true))
+      dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(false))
     },
   getLastWinners:
     () => async (dispatch, store) => {
@@ -274,6 +274,7 @@ export const ApplicationActionCreator = {
       }
 
       const chainId = await getConnectedChainId()
+      if (chainId !== Config().CHAIN_ID) dispatch(ApplicationActionCreator.setNotCorrectChain(true))
       const currentAddress = walletRPC.account.address
       web3.eth.defaultAccount = web3.eth.accounts[0]
       console.log('Wallet connected:', currentAddress)
@@ -290,8 +291,8 @@ export const ApplicationActionCreator = {
 
       if (notCorrectChain) {
         dispatch(ApplicationActionCreator.setToastData({
-          text: <>Change your chain to a correct one.</>,
-          description: <>Not correct chain.</>
+          text: <>Change your network to the {Config().CHAIN_ID === 137 ? 'Polygon Network' : 'Mumbai'}</>,
+          description: <>Incorrect network!</>
         }))
         return
       }
@@ -320,10 +321,18 @@ export const ApplicationActionCreator = {
       } catch (error) {
         console.log(error)
         dispatch(ApplicationActionCreator.setIsWithdrawTransaction(false))
-        dispatch(ApplicationActionCreator.setToastData({
-          text: <>{error.message}</>,
-          description: <>Transaction error</>
-        }))
+        if (error.code === 4001) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>User rejected the request.</>,
+            description: <>Transaction error</>
+          }))
+        } else {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>{error.message}</>,
+            description: <>Transaction error</>
+          }))
+        }
+        console.log(error.code)
         return
       }
 
@@ -345,8 +354,8 @@ export const ApplicationActionCreator = {
 
       if (notCorrectChain) {
         dispatch(ApplicationActionCreator.setToastData({
-          text: <>Change your chain to a correct one.</>,
-          description: <>Not correct chain.</>
+          text: <>Change your network to the {Config().CHAIN_ID === 137 ? 'Polygon Network' : 'Mumbai'}</>,
+          description: <>Incorrect network!</>
         }))
         return
       }
@@ -386,11 +395,19 @@ export const ApplicationActionCreator = {
           data: approveData
         })
       } catch (error) {
-        dispatch(ApplicationActionCreator.setToastData({
-          text: <>{error.message}</>,
-          description: <>Transaction error</>
-        }))
-        console.log(error)
+        dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
+        if (error.code === 4001) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>User rejected the request.</>,
+            description: <>Transaction error</>
+          }))
+        } else {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>{error.message}</>,
+            description: <>Transaction error</>
+          }))
+        }
+        console.log(error.code)
         return
       }
 
@@ -405,11 +422,18 @@ export const ApplicationActionCreator = {
         })
       } catch (error) {
         dispatch(ApplicationActionCreator.setIsDepositTransaction(false))
-        dispatch(ApplicationActionCreator.setToastData({
-          text: <>{error.message}</>,
-          description: <>Transaction error</>
-        }))
-        console.log(error)
+        if (error.code === 4001) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>User rejected the request.</>,
+            description: <>Transaction error</>
+          }))
+        } else {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>{error.message}</>,
+            description: <>Transaction error</>
+          }))
+        }
+        console.log(error.code)
         return
       }
 

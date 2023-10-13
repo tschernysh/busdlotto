@@ -1,8 +1,12 @@
+import { Button } from "Components/Button/Button"
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const MainReferral = () => {
+
+
+  const navigate = useNavigate()
 
   return (
     <div className='mt-20 max-w-screen-mmx mx-auto  after__block_line'>
@@ -19,7 +23,7 @@ export const MainReferral = () => {
         </p>
       </div>
       <div className='w-full text-center mt-10 mb-14'>
-        <Link to='referral' className='w-full button__focus whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-2 sm:px-24'>view your referral link</Link>
+        <Button onClick={() => navigate('referral')}>view your referral link</Button>
       </div>
     </div>
   )

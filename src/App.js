@@ -103,8 +103,8 @@ function App() {
   useEffect(() => {
     if (notCorrectChain) {
       dispatch(ApplicationActionCreator.setToastData({
-        text: <>Change your chain to a correct one.</>,
-        description: <>Not correct chain.</>
+        text: <>Change your network to the {Config().CHAIN_ID === 137 ? 'Polygon Network' : 'Mumbai'}</>,
+        description: <>Incorrect network!</>
       }))
 
     }

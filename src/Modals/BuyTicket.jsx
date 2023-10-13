@@ -15,6 +15,7 @@ export const BuyTicket = () => {
   }
 
   const handleMinusTicketAmount = () => {
+    if (buyTicketsAmount <= 1) return
     dispatch(ApplicationActionCreator.setBuyTicketsAmount(buyTicketsAmount - 1))
   }
 

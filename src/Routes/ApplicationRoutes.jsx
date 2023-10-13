@@ -17,7 +17,7 @@ export const ApplicationRoutes = (props) => {
   const { connector: activeConnector, address, isConnecting, isDisconnected } = useAccount()
   const { data, isError } = useWalletClient()
   const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork()
-  const { notCorrectChain } = useSelector(state => state.applicationReducer)
+  const { notCorrectChain, walletAddress, walletRPC } = useSelector(state => state.applicationReducer)
   const dispatch = useDispatch()
 
   const disconnectWallet = () => {
@@ -26,10 +26,12 @@ export const ApplicationRoutes = (props) => {
   }
 
   useEffect(() => {
+    console.log(notCorrectChain)
     if (notCorrectChain) {
+      console.log('change')
       switchNetwork?.(Config().CHAIN_ID)
     }
-  }, [notCorrectChain])
+  }, [notCorrectChain, address, walletRPC])
 
 
   useEffect(() => {

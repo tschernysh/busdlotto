@@ -3,9 +3,10 @@ import { ConnectWallet } from 'Components/ConnectWallet/ConnectWallet'
 import { useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { formatNumber } from 'utils/formatNumber';
 import { ReactComponent as Loader } from 'Assets/loader.svg'
+import { Button } from 'Components/Button/Button';
 
 const carouselOptions = {
   autoPlay: false,
@@ -29,8 +30,9 @@ const tickets = [
 
 export const MainChance = () => {
 
-  const { currentTicketIndex } = useSelector(state => state.applicationReducer)
+  const navigate = useNavigate()
 
+  const { currentTicketIndex } = useSelector(state => state.applicationReducer)
   return (
     <div className='mx-auto after__block_line mt-20'>
       <h1 className='text-5xl sm:text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
@@ -39,7 +41,7 @@ export const MainChance = () => {
       </Carousel>
       <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
-        <Link to='results' className='w-full button__focus whitespace-nowrap sm:w-min text-center font-inter600 text-title text-base sm:text-xl py-5 bg-gold uppercase rounded-xl leading-3 px-2 sm:px-24'>check your results</Link>
+        <Button onClick={() => navigate('referral')}>view your referral link</Button>
       </div>
     </div>
   )
