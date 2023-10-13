@@ -79,7 +79,7 @@ export const ApplicationActionCreator = {
 
       const res = await getCurrentTicketIndex()
 
-      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0].toTicket))
+      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0]?.toTicket))
 
       dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(false))
     },
@@ -309,7 +309,6 @@ export const ApplicationActionCreator = {
         withdraw = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
-          gasPrice: 3 * 10 ** 8,
           data: claimData
         })
 
@@ -391,7 +390,6 @@ export const ApplicationActionCreator = {
         approveToken = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().TOKEN_CONTRACT_ADDRESS,
-          gasPrice: 3 * 10 ** 8,
           data: approveData
         })
       } catch (error) {
@@ -417,7 +415,6 @@ export const ApplicationActionCreator = {
         depositTxn = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
-          gasPrice: 3 * 10 ** 8,
           data: buyData
         })
       } catch (error) {
