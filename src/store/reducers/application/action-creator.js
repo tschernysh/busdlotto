@@ -79,7 +79,9 @@ export const ApplicationActionCreator = {
 
       const res = await getCurrentTicketIndex()
 
-      dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0]?.toTicket))
+      if (+res.ticketBoughts[0]?.toTicket) {
+        dispatch(ApplicationActionCreator.setCurrentTicketIndex(+res.ticketBoughts[0]?.toTicket))
+      }
 
       dispatch(ApplicationActionCreator.setCurrentTicketIndexLoader(false))
     },
@@ -157,7 +159,7 @@ export const ApplicationActionCreator = {
       try {
         tokenBalance = await tokenContract.methods.balanceOf(walletAddress).call()
         tokenBalance = tokenBalance.toString()
-        tokenBalance = +web3.utils.fromWei(tokenBalance, 'ether')
+        tokenBalance = tokenBalance / 10e6
       } catch (error) {
         console.log(error)
         return
@@ -379,7 +381,7 @@ export const ApplicationActionCreator = {
       else if (localReferral) currentReferral = localReferral
       else currentReferral = defaultReferrer
 
-      const amountToSend = web3.utils.toWei(amount * ticketPriceUsdt, 'ether')
+      const amountToSend = amount * ticketPriceUsdt * 10e6
 
 
       const approveData = tokenContract.methods.approve(Config().CHAIN_LOTTO_CONTRACT_ADDRESS, amountToSend).encodeABI()

@@ -41,7 +41,7 @@ export const MainChance = () => {
       </Carousel>
       <div className='w-full mt-8  mb-16 text-center '>
         <p className='font-poppins400 text-4xl text-description mb-8' >Check if you have won!</p>
-        <Button onClick={() => navigate('referral')}>view your referral link</Button>
+        <Button onClick={() => navigate('results')}>check your results</Button>
       </div>
     </div>
   )
