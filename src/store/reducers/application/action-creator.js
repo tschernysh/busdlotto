@@ -159,7 +159,7 @@ export const ApplicationActionCreator = {
       try {
         tokenBalance = await tokenContract.methods.balanceOf(walletAddress).call()
         tokenBalance = tokenBalance.toString()
-        tokenBalance = tokenBalance / 10e6
+        tokenBalance = tokenBalance / 10e5
       } catch (error) {
         console.log(error)
         return
@@ -311,6 +311,7 @@ export const ApplicationActionCreator = {
         withdraw = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
+          gasLimit: 3_000_000,
           data: claimData
         })
 
@@ -381,7 +382,7 @@ export const ApplicationActionCreator = {
       else if (localReferral) currentReferral = localReferral
       else currentReferral = defaultReferrer
 
-      const amountToSend = amount * ticketPriceUsdt * 10e6
+      const amountToSend = amount * ticketPriceUsdt * 10e5
 
 
       const approveData = tokenContract.methods.approve(Config().CHAIN_LOTTO_CONTRACT_ADDRESS, amountToSend).encodeABI()
@@ -392,6 +393,7 @@ export const ApplicationActionCreator = {
         approveToken = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().TOKEN_CONTRACT_ADDRESS,
+          gasLimit: 3_000_000,
           data: approveData
         })
       } catch (error) {
@@ -412,11 +414,12 @@ export const ApplicationActionCreator = {
       }
 
       let depositTxn
-      const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral).encodeABI()
+      const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral || 0).encodeABI()
       try {
         depositTxn = await web3.eth.sendTransaction({
           from: walletAddress,
           to: Config().CHAIN_LOTTO_CONTRACT_ADDRESS,
+          gasLimit: 3_000_000,
           data: buyData
         })
       } catch (error) {

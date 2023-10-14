@@ -9,7 +9,6 @@ export const initWeb3 = async (wallet) => {
   if (typeof web3.currentProvider === 'undefined') {
     web3.setProvider(new Web3.providers.HttpProvider(Config().WEB3_BSC_URL));
   }
-
   return web3
 
 }

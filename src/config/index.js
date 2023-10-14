@@ -2,7 +2,7 @@
 export const Config = () => {
   if (true) {
     return {
-      WEB3_BSC_URL: 'https://polygon-mainnet.infura.io',
+      WEB3_BSC_URL: 'https://polygon-mainnet.infura.io/v3/d14eccef78b04cb9b74159585ee6b401',
       TOKEN_CONTRACT_ADDRESS: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xA4e2CdCA8E33D2b27B5Bdf8Ea74E45Fc6Ecc5574',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/ditechdev/chainlotto',

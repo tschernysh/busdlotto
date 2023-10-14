@@ -16,8 +16,10 @@ export const MainPage = () => {
   }, [])
 
   useEffect(() => {
-    console.log(ref)
-    localStorage.setItem("refAddress", ref);
+    if (ref) {
+
+      localStorage.setItem("refAddress", ref);
+    }
   }, [ref])
 
   return (

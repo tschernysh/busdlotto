@@ -64,7 +64,7 @@ export const AccountActionCreator = {
 
       let upline
       try {
-        upline = await chainLottoContract.methods.referrals(walletAddress, 0).call()
+        upline = await chainLottoContract.methods.referrals(walletAddress, 0).call({ from: walletAddress })
       } catch (error) {
         console.log(error)
         return
