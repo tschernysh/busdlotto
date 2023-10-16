@@ -1,13 +1,41 @@
 import { ConfigContext } from "applicationContext"
 import { Button } from "Components/Button/Button"
-import { useContext } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
 export const MainTitle = () => {
   const { setBuyModalShow } = useContext(ConfigContext)
 
+  const mainTitleRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (mainTitleRef.current) {
+      observer.observe(mainTitleRef.current);
+    }
+
+    return () => {
+      if (mainTitleRef.current) {
+        observer.unobserve(mainTitleRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className='max-w-screen-mmx sm:pt-0 pt-56 sm:px-0 px-4 mx-auto after__block_line'>
+    <div ref={mainTitleRef} className={`max-w-screen-mmx sm:pt-0 pt-56 sm:px-0 px-4 ${isVisible && 'block__visible_left'} mx-auto after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-c text-title   flex flex-col '>
         <span className='leading-[1.1em] block mt-14'>Win up to </span>
         <span className='leading-[1.1em] text-gold'>100K USDT</span>

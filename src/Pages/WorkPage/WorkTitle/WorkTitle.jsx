@@ -4,15 +4,45 @@ import Hand from 'Assets/work/hand.png'
 import Wallet from 'Assets/work/wallet.png'
 import Star from 'Assets/work/star.png'
 import { Button } from 'Components/Button/Button'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { ConfigContext } from 'applicationContext'
 
 export const WorkTitle = () => {
 
   const { setBuyModalShow } = useContext(ConfigContext)
 
+
+  const workTitleRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (workTitleRef.current) {
+      observer.observe(workTitleRef.current);
+    }
+
+    return () => {
+      if (workTitleRef.current) {
+        observer.unobserve(workTitleRef.current);
+      }
+    };
+  }, []);
+
+
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto '>
+    <div ref={workTitleRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
       <h1 className='font-inter800 text-5xl px-4 sm:px-0 sm:text-7xl mb-10 text-white'>
         How it works
       </h1>

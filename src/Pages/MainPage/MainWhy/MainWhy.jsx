@@ -5,11 +5,41 @@ import Chain from 'Assets/why/chain.png'
 import Coins from 'Assets/why/coins.png'
 import Cup from 'Assets/why/cup.png'
 import Megaphone from 'Assets/why/megaphone.png'
+import { useEffect, useRef, useState } from 'react'
 
 export const MainWhy = () => {
 
+  const mainWhyRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (mainWhyRef.current) {
+      observer.observe(mainWhyRef.current);
+    }
+
+    return () => {
+      if (mainWhyRef.current) {
+        observer.unobserve(mainWhyRef.current);
+      }
+    };
+  }, []);
+
+
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto after__block_line'>
+    <div ref={mainWhyRef} className={` mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 px-4 sm:px-0 text-white'>
         Why to play <span className='font-poppins600 text-gold'>CHAINLOTTO?</span>
       </h1>

@@ -1,6 +1,6 @@
 import { ConfigContext } from "applicationContext"
 import { Button } from "Components/Button/Button"
-import { useContext } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 
 
 export const WorkLore = () => {
@@ -9,9 +9,37 @@ export const WorkLore = () => {
 
   const isMobile = window.innerWidth < 640
 
+  const workLoreRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (workLoreRef.current) {
+      observer.observe(workLoreRef.current);
+    }
+
+    return () => {
+      if (workLoreRef.current) {
+        observer.unobserve(workLoreRef.current);
+      }
+    };
+  }, []);
+
   return isMobile
     ? (
-      <div className='mt-20 max-w-screen-mmx mx-auto '>
+      <div ref={workLoreRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
         <div className='fade__block_right p-10 flex flex-col gap-y-8 mb-10'>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 20 tickets have been bought, <span className='text-gold font-poppins600'>40 USDT</span> are drawn.</p>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 100 tickets have been bought, <span className='text-gold font-poppins600'>100 USDT</span> are drawn.</p>
@@ -36,7 +64,7 @@ export const WorkLore = () => {
       </div >
     )
     : (
-      <div className='mt-20 max-w-screen-mmx mx-auto '>
+      <div ref={workLoreRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
         <div className='fade__block_right p-10 flex flex-col gap-y-8 mb-10'>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 20 tickets have been bought, <span className='text-gold font-poppins600'>40 USDT</span> are drawn.</p>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 100 tickets have been bought, <span className='text-gold font-poppins600'>100 USDT</span> are drawn.</p>

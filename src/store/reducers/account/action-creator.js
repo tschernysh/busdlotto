@@ -109,7 +109,7 @@ export const AccountActionCreator = {
 
       res.wonDrawns.map(el => {
         let winValue = Object.values(el)[0]
-        winValue = +web3.utils.fromWei(winValue, 'ether')
+        winValue = winValue / 10e5
         if (userWinnings[winValue]) userWinnings[winValue] = userWinnings[winValue] + 1
         else userWinnings[winValue] = 1
 
@@ -130,7 +130,7 @@ export const AccountActionCreator = {
       console.log(res)
 
       const userReferralsBonus = res?.referralBonusGranteds.map(el => {
-        const newCommision = +web3.utils.fromWei(el.rewardPerRefferer, 'ether')
+        const newCommision = el.rewardPerRefferer / 10e5
         return { wallet: el.buyer, ticketsBought: el.numberOfTickets, level: el.level, commision: newCommision }
       })
 

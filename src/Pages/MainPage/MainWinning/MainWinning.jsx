@@ -4,16 +4,42 @@ import { formatNumber } from "utils/formatNumber"
 import Map1 from 'Assets/main/map1.png'
 import Map2 from 'Assets/main/map2.png'
 import Map3 from 'Assets/main/map3.png'
+import { useEffect, useRef, useState } from "react"
 
 
 export const MainWinning = () => {
 
   const { lastWinnings } = useSelector(state => state.applicationReducer)
+  const mainWinningRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
 
-  //time.toLocaleTimeString()
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (mainWinningRef.current) {
+      observer.observe(mainWinningRef.current);
+    }
+
+    return () => {
+      if (mainWinningRef.current) {
+        observer.unobserve(mainWinningRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className='max-w-screen-mmx mx-auto after__block_line mt-20'>
+    <div ref={mainWinningRef} className={`max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} after__block_line mt-20`}>
       <h1 className='text-4xl sm:text-7xl px-4 sm:px-0 font-inter800 text-white mb-8'>Winning wallets</h1>
       <p className='font-poppins400 text-description px-4 sm:px-0 text-3xl sm:text-4xl mb-16'>
         Yours can be here as well!

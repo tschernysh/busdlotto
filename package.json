@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^13.5.0",
     "@web3modal/ethereum": "^2.7.1",
     "@web3modal/react": "^2.7.1",
+    "animate.css": "^4.1.1",
     "axios": "^1.5.0",
     "react": "^18.2.0",
+    "react-animate-on-scroll": "^2.1.7",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23",
@@ -34,7 +36,7 @@
       "react-app/jest"
     ]
   },
-"browserslist": {
+  "browserslist": {
     "production": [
       "chrome >= 67",
       "edge >= 79",

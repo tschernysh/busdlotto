@@ -1,8 +1,38 @@
+import { useEffect, useRef, useState } from "react";
 
 
 export const ReferralBenefits = () => {
+
+  const referralBenefitsRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (referralBenefitsRef.current) {
+      observer.observe(referralBenefitsRef.current);
+    }
+
+    return () => {
+      if (referralBenefitsRef.current) {
+        observer.unobserve(referralBenefitsRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto '>
+    <div ref={referralBenefitsRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} `}>
       <div className='px-4 sm:px-0'>
         <h1 className='font-inter800 text-5xl sm:text-7xl mb-5 text-right sm:mb-24 text-white'>
           Experience the benefits

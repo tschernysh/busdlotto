@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ReactComponent as Arrow } from 'Assets/arrow.svg'
 import { ReactComponent as ArrowDown } from 'Assets/downArrow.svg'
+import { isVisible } from "@testing-library/user-event/dist/utils"
 
 const faqTiles = [
   {
@@ -46,15 +47,43 @@ const faqTiles = [
 
 export const MainFaq = () => {
 
+  const mainFaqRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (mainFaqRef.current) {
+      observer.observe(mainFaqRef.current);
+    }
+
+    return () => {
+      if (mainFaqRef.current) {
+        observer.unobserve(mainFaqRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className='mt-10 sm:mt-20 max-w-screen-mmx mx-auto px-4 sm:px-0 after__block_line'>
+    <div ref={mainFaqRef} className={`mt-10 sm:mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} px-4 sm:px-0 after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 text-white'>
         FAQ
       </h1>
       <div className='mb-16 flex flex-col sm:gap-y-8 gap-y-5'>
         {faqTiles.map(el => <FaqTile {...el} />)}
       </div>
-    </div>
+    </div >
   )
 }
 

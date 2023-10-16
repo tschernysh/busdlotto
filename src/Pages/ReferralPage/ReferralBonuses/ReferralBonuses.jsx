@@ -1,6 +1,6 @@
 import { ConnectWallet } from "Components/ConnectWallet/ConnectWallet"
 import { Config } from "config"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReactComponent as Arrow } from 'Assets/arrow.svg'
 
@@ -10,6 +10,34 @@ export const ReferralBonuses = () => {
   const [paginationValue, setPaginationValue] = useState([])
   const [referralCurrentPage, setReferralCurrentPage] = useState(1)
   const pagination = Math.ceil(referralsBonus.length / Config().BONUS_PAGE_ITEMS)
+
+  const referralBonusesRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (referralBonusesRef.current) {
+      observer.observe(referralBonusesRef.current);
+    }
+
+    return () => {
+      if (referralBonusesRef.current) {
+        observer.unobserve(referralBonusesRef.current);
+      }
+    };
+  }, []);
 
   const setInitialPagination = (pagination) => {
     let initialPagination = []
@@ -64,7 +92,7 @@ export const ReferralBonuses = () => {
   }, [referralCurrentPage])
 
   return (
-    <div className='mt-20 max-w-screen-mmx mx-auto '>
+    <div ref={referralBonusesRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
       <h1 className='font-inter800 text-5xl sm:text-7xl px-4 sm:px-0 mb-24 text-white'>
         Check your referral bonuses
       </h1>
@@ -76,7 +104,7 @@ export const ReferralBonuses = () => {
                 <th className='pr-8 sm:pr-0'>Wallet number</th>
                 <th className='px-8 sm:px-0'>Level</th>
                 <th className='px-8 sm:px-0'>Tickets bought</th>
-                <th className='pl-8 sm:pl-0'>Your comission</th>
+                <th className='pl-8 sm:pl-0'>Your commission</th>
               </tr>
             </thead>
             <tbody className=''>
@@ -85,7 +113,7 @@ export const ReferralBonuses = () => {
           </table>
         </div>
         {
-          referralsBonus.length && <div className='flex items-center justify-center mt-16 gap-x-11'>
+          referralsBonus.length ? <div className='flex items-center justify-center mt-16 gap-x-11'>
             <div>
               <Arrow
                 onClick={() => referralCurrentPage - 1 !== 0 && handleChangePage(referralCurrentPage - 1)}
@@ -107,7 +135,7 @@ export const ReferralBonuses = () => {
                 className='pagination__arrow transform rotate-90 cursor-pointer w-6 h-6' />
             </div>
           </div>
-        }
+            : null}
       </div>
       <div className='text-center w-full mt-10'>
         <p className='font-poppins400 text-2xl sm:text-4xl text-description mb-8'>Сonnect wallet to check your referrals</p>

@@ -1,4 +1,5 @@
 import Crown from 'Assets/results/crown.png'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export const ResultsTitle = () => {
@@ -7,8 +8,36 @@ export const ResultsTitle = () => {
 
   const walletToShow = walletAddress ? `${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}` : 'Connect wallet first'
 
+  const resultsTitleRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (resultsTitleRef.current) {
+      observer.observe(resultsTitleRef.current);
+    }
+
+    return () => {
+      if (resultsTitleRef.current) {
+        observer.unobserve(resultsTitleRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className='pt-20 max-w-screen-mmx mx-auto text-center z-10 relative'>
+    <div ref={resultsTitleRef} className={`pt-20 max-w-screen-mmx mx-auto text-center ${isVisible && 'block__visible_right'} z-10 relative`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-24 text-white w-full sm:5/12 mx-auto'>
         Check your results
       </h1>

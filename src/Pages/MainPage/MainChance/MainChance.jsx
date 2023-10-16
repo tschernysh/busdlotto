@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { formatNumber } from 'utils/formatNumber';
 import { ReactComponent as Loader } from 'Assets/loader.svg'
 import { Button } from 'Components/Button/Button';
+import { useEffect, useRef, useState } from 'react';
 
 const carouselOptions = {
   autoPlay: false,
@@ -31,10 +32,37 @@ const tickets = [
 export const MainChance = () => {
 
   const navigate = useNavigate()
+  const mainChanceRef = useRef()
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible(true);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5, // Adjust this threshold as needed
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (mainChanceRef.current) {
+      observer.observe(mainChanceRef.current);
+    }
+
+    return () => {
+      if (mainChanceRef.current) {
+        observer.unobserve(mainChanceRef.current);
+      }
+    };
+  }, []);
 
   const { currentTicketIndex } = useSelector(state => state.applicationReducer)
   return (
-    <div className='mx-auto after__block_line mt-20'>
+    <div ref={mainChanceRef} className={`mx-auto ${isVisible && 'block__visible_right'} after__block_line mt-20`}>
       <h1 className='text-5xl sm:text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
       <Carousel className='landing__main__carousel' {...carouselOptions}>
         {tickets.map(el => <Ticket {...el} currentTicketIndex={currentTicketIndex} />)}

@@ -202,6 +202,35 @@
     transition: all 0.2s;
     transform: translate(0px, 3px);
   }
+  .block__visible_right {
+    animation: fadeRight 1s 1 ease;
+  }
+  .block__visible_left {
+    animation: fadeLeft 1s 1 ease;
+  }
+}
+
+@keyframes fadeRight{
+  from{
+    opacity: 0;
+    transform: translate(-100%, 0);
+  }
+  to{
+  opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeLeft{
+  from{
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
+  to{
+
+  opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
   @media screen and (max-width: 640px) {
