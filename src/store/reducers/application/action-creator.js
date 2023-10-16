@@ -6,6 +6,7 @@ import ChainLotto from 'contracts/ChainLotto.json'
 import { Config } from 'config';
 import { getCurrentTicketIndex, getLastWinners } from 'api';
 import { AccountActionCreator } from '../account/action-creator';
+import sleep from 'utils/sleep';
 
 export const ApplicationActionCreator = {
   setWalletAddress: (walletAddress) => ({
@@ -412,6 +413,14 @@ export const ApplicationActionCreator = {
         console.log(error.code)
         return
       }
+
+      console.log(approveToken.transactionHash)
+
+
+      do {
+        await sleep(2000)
+        console.log('hey')
+      } while (!approveToken.transactionHash)
 
       let depositTxn
       const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral || 0).encodeABI()
