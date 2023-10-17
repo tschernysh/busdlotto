@@ -406,7 +406,7 @@ export const ApplicationActionCreator = {
           }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
-            text: <>{error.message}</>,
+            text: <>{error.data.message}</>,
             description: <>Transaction error</>
           }))
         }
@@ -421,6 +421,8 @@ export const ApplicationActionCreator = {
         await sleep(2000)
         console.log('hey')
       } while (!approveToken.transactionHash)
+
+      await sleep(5000)
 
       let depositTxn
       const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral || 0).encodeABI()
@@ -440,7 +442,7 @@ export const ApplicationActionCreator = {
           }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
-            text: <>{error.message}</>,
+            text: <>{error.data.message}</>,
             description: <>Transaction error</>
           }))
         }
