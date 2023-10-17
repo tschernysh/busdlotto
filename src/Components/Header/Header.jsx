@@ -12,7 +12,7 @@ export const Header = (props) => {
   const location = useLocation()
 
   return (
-    <header className='sm:bg-prussian backdrop-blur-lg sm:backdrop-blur-0 z-40 sticky top-0 left-0 py-4 sm:py-8'>
+    <header className='sm:bg-prussian backdrop-blur-lg sm:backdrop-blur-0 sm:px-24 mmx:px-0 z-40 sticky top-0 left-0 py-4 sm:py-8'>
       <div className='gap-x-24 px-4 mx-auto justify-between max-w-screen-mmx flex'>
         <Link className='flex items-center' to='/'>
           <img src={Logo} className='w-20 sm:w-32' />

@@ -154,7 +154,7 @@ export const MainWhy = () => {
 
 
   return (
-    <div className={` mt-20 max-w-screen-mmx mx-auto after__block_line`}>
+    <div className={`mmx:px-0 sm:px-24 mt-20 max-w-screen-mmx mx-auto after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 px-4 sm:px-0 text-white'>
         Why to play <span className='font-poppins600 text-gold'>CHAINLOTTO?</span>
       </h1>

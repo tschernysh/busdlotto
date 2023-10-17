@@ -74,7 +74,7 @@ export const ReferralBenefits = () => {
   }, []);
 
   return (
-    <div className={`mt-20 max-w-screen-mmx mx-auto `}>
+    <div className={`mt-20 mmx:px-0 sm:px-24 max-w-screen-mmx mx-auto `}>
       <div className='px-4 sm:px-0'>
         <h1 className='font-inter800 text-5xl sm:text-7xl mb-5 text-right sm:mb-24 text-white'>
           Experience the benefits

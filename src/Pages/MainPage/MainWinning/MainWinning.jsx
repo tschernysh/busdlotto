@@ -63,7 +63,7 @@ export const MainWinning = () => {
   }, []);
 
   return (
-    <div className={`max-w-screen-mmx mx-auto  after__block_line mt-20`}>
+    <div className={`max-w-screen-mmx mx-auto mmx:px-0 sm:px-24 after__block_line mt-20`}>
       <h1 className='text-4xl sm:text-7xl px-4 sm:px-0 font-inter800 text-white mb-8'>Winning wallets</h1>
       <p className='font-poppins400 text-description px-4 sm:px-0 text-3xl sm:text-4xl mb-16'>
         Yours can be here as well!

@@ -84,7 +84,7 @@ export const ReferralTitle = () => {
   }
 
   return (
-    <div ref={referralTitleRef} className={`max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_left' : 'opacity-0'} px-4 sm:px-0 pt-48 sm:pt-0`}>
+    <div ref={referralTitleRef} className={`max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_left' : 'opacity-0'} px-4 mmx:px-0 sm:px-24 pt-48 sm:pt-0`}>
       <h1 className='font-inter800 w-full sm:w-1/2 text-5xl sm:text-c text-title flex flex-col '>
         <span className='leading-[1.1em] block mt-14'>Referral</span>
         <span className='leading-[1.1em] '>Program</span>

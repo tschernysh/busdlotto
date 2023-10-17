@@ -42,7 +42,7 @@ export const WorkTitle = () => {
 
 
   return (
-    <div ref={workTitleRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_top' : 'opacity-0'} `}>
+    <div ref={workTitleRef} className={`mt-20 mmx:px-0 sm:px-24 max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_top' : 'opacity-0'} `}>
       <h1 className='font-inter800 text-5xl px-4 sm:px-0 sm:text-7xl mb-10 text-white'>
         How it works
       </h1>

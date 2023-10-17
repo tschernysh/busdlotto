@@ -76,7 +76,7 @@ export const MainFaq = () => {
   }, []);
 
   return (
-    <div ref={mainFaqRef} className={`mt-10 sm:mt-20 max-w-screen-mmx mx-auto px-4 sm:px-0 after__block_line`}>
+    <div ref={mainFaqRef} className={`mt-10 sm:mt-20 max-w-screen-mmx mx-auto px-4 mmx:px-0 sm:px-24 after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 text-white'>
         FAQ
       </h1>

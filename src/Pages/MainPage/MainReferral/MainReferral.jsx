@@ -35,7 +35,7 @@ export const MainReferral = () => {
   }, []);
 
   return (
-    <div ref={mainReferralRef} className={`mt-20 max-w-screen-mmx mx-auto after__block_line ${isVisible ? 'block__visible_right' : 'opacity-0'}`}>
+    <div ref={mainReferralRef} className={`mt-20 mmx:px-0 sm:px-24 max-w-screen-mmx mx-auto after__block_line ${isVisible ? 'block__visible_right' : 'opacity-0'}`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl sm:px-0 px-4 mb-8 sm:mb-24 text-white'>
         Tell your friends & <span className='text-gold font-poppins600'>earn extra!</span>
       </h1>
