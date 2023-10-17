@@ -12,6 +12,7 @@ export const Config = () => {
       CHAIN_ID: 137,
       BSC_SCAN_URL: 'https://polygonscan.com/tx/',
       BONUS_PAGE_ITEMS: 5,
+      CONFIRM_BLOCK: 5
     }
   } else {
     return {
@@ -26,6 +27,7 @@ export const Config = () => {
       BSC_SCAN_URL: 'https://mumbai.polygonscan.com/tx/',
       CHAIN_LOTTO_CONTRACT: 'https://mumbai.polygonscan.com/address/',
       BONUS_PAGE_ITEMS: 5,
+      CONFIRM_BLOCK: 5
     }
   }
 }

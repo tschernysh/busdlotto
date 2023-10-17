@@ -9,12 +9,62 @@ import { useEffect, useRef, useState } from 'react'
 
 export const MainWhy = () => {
 
-  const mainWhyRef = useRef()
-  const [isVisible, setIsVisible] = useState(false);
+  const mainWhyRef1 = useRef()
+  const [isVisible1, setIsVisible1] = useState(false);
 
-  const handleIntersection = (entries) => {
+  const mainWhyRef2 = useRef()
+  const [isVisible2, setIsVisible2] = useState(false);
+
+
+  const mainWhyRef3 = useRef()
+  const [isVisible3, setIsVisible3] = useState(false);
+
+
+  const mainWhyRef4 = useRef()
+  const [isVisible4, setIsVisible4] = useState(false);
+
+
+  const mainWhyRef5 = useRef()
+  const [isVisible5, setIsVisible5] = useState(false);
+
+
+  const mainWhyRef6 = useRef()
+  const [isVisible6, setIsVisible6] = useState(false);
+
+
+  const handleIntersection1 = (entries) => {
     if (entries[0].isIntersecting) {
-      setIsVisible(true);
+      setIsVisible1(true);
+    }
+  };
+
+  const handleIntersection2 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible2(true);
+    }
+  };
+
+  const handleIntersection3 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible3(true);
+    }
+  };
+
+  const handleIntersection4 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible4(true);
+    }
+  };
+
+  const handleIntersection5 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible5(true);
+    }
+  };
+
+  const handleIntersection6 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible6(true);
     }
   };
 
@@ -25,27 +75,92 @@ export const MainWhy = () => {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersection, options);
-    if (mainWhyRef.current) {
-      observer.observe(mainWhyRef.current);
+    const observer = new IntersectionObserver(handleIntersection1, options);
+    if (mainWhyRef1.current) {
+      observer.observe(mainWhyRef1.current);
     }
 
     return () => {
-      if (mainWhyRef.current) {
-        observer.unobserve(mainWhyRef.current);
+      if (mainWhyRef1.current) {
+        observer.unobserve(mainWhyRef1.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection2, options);
+    if (mainWhyRef2.current) {
+      observer.observe(mainWhyRef2.current);
+    }
+
+    return () => {
+      if (mainWhyRef2.current) {
+        observer.unobserve(mainWhyRef2.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection3, options);
+    if (mainWhyRef3.current) {
+      observer.observe(mainWhyRef3.current);
+    }
+
+    return () => {
+      if (mainWhyRef3.current) {
+        observer.unobserve(mainWhyRef3.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection4, options);
+    if (mainWhyRef4.current) {
+      observer.observe(mainWhyRef4.current);
+    }
+
+    return () => {
+      if (mainWhyRef4.current) {
+        observer.unobserve(mainWhyRef4.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection5, options);
+    if (mainWhyRef5.current) {
+      observer.observe(mainWhyRef5.current);
+    }
+
+    return () => {
+      if (mainWhyRef5.current) {
+        observer.unobserve(mainWhyRef5.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection6, options);
+    if (mainWhyRef6.current) {
+      observer.observe(mainWhyRef6.current);
+    }
+
+    return () => {
+      if (mainWhyRef6.current) {
+        observer.unobserve(mainWhyRef6.current);
       }
     };
   }, []);
 
 
   return (
-    <div ref={mainWhyRef} className={` mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} after__block_line`}>
+    <div className={` mt-20 max-w-screen-mmx mx-auto after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-7xl mb-10 sm:mb-24 px-4 sm:px-0 text-white'>
         Why to play <span className='font-poppins600 text-gold'>CHAINLOTTO?</span>
       </h1>
       <div className='flex flex-col gap-y-10 sm:gap-y-36 mb-16'>
 
-        <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
+        <div ref={mainWhyRef1} className={`fade__block_right sm:overflow-visible overflow-hidden ${isVisible1 ? 'block__visible_right' : 'opacity-0'} relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Anonymous</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
@@ -55,7 +170,7 @@ export const MainWhy = () => {
           <img className='absolute right-0 bottom-0 sm:opacity-100 opacity-20  ' src={Anonymous} />
         </div>
 
-        <div className='fade__block_left overflow-hidden sm:overflow-visible flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
+        <div ref={mainWhyRef2} className={`fade__block_left overflow-hidden sm:overflow-visible ${isVisible2 ? 'block__visible_left' : 'opacity-0'} flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <img className='absolute left-0 bottom-0 sm:opacity-100 opacity-20' src={Chain} />
           <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Transparent</h3>
@@ -66,7 +181,7 @@ export const MainWhy = () => {
           </div>
         </div>
 
-        <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
+        <div ref={mainWhyRef3} className={`fade__block_right sm:overflow-visible overflow-hidden ${isVisible3 ? 'block__visible_right' : 'opacity-0'} relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>100K win</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
@@ -78,7 +193,7 @@ export const MainWhy = () => {
           <img className='absolute right-0 bottom-0 sm:opacity-100 opacity-20  ' src={HundredK} />
         </div>
 
-        <div className='fade__block_left flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8  sm:px-10 sm:py-10 z-10'>
+        <div ref={mainWhyRef4} className={`fade__block_left overflow-hidden sm:overflow-visible ${isVisible4 ? 'block__visible_left' : 'opacity-0'} flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <img className='absolute left-0 bottom-0  sm:opacity-100 opacity-20' src={Coins} />
           <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>Crosschain capability</h3>
@@ -90,7 +205,7 @@ export const MainWhy = () => {
           </div>
         </div>
 
-        <div className='fade__block_right sm:overflow-visible overflow-hidden relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
+        <div ref={mainWhyRef5} className={`fade__block_right sm:overflow-visible overflow-hidden ${isVisible5 ? 'block__visible_right' : 'opacity-0'} relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <div className=' w-full sm:w-8/12'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>60% goes to the prize pool</h3>
             <p className='font-poppins400 text-2xl sm:text-3xl text-description mb-5'>
@@ -102,7 +217,7 @@ export const MainWhy = () => {
           <img className='absolute right-0 bottom-0 sm:opacity-100 opacity-20  ' src={Cup} />
         </div>
 
-        <div className='fade__block_left sm:overflow-visible overflow-hidden flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10'>
+        <div ref={mainWhyRef6} className={`fade__block_left overflow-hidden sm:overflow-visible ${isVisible6 ? 'block__visible_left' : 'opacity-0'} flex justify-end relative font-poppins400 text-5xl text-white  px-4 py-8 sm:py-10 sm:px-10 z-10`}>
           <img className='absolute left-0 bottom-0  sm:opacity-100 opacity-20' src={Megaphone} />
           <div className=' w-full sm:w-8/12 text-left sm:text-right'>
             <h3 className='mb-8 font-inter800 text-3xl sm:text-5xl  text-title'>3-level referral program</h3>
@@ -116,6 +231,6 @@ export const MainWhy = () => {
 
       </div>
 
-    </div>
+    </div >
   )
 }

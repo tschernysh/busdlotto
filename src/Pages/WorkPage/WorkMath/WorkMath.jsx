@@ -33,7 +33,7 @@ export const WorkMath = () => {
   }, []);
 
   return (
-    <div ref={workMathRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
+    <div ref={workMathRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_right' : 'opacity-0'} `}>
       <h1 className='font-inter800 text-5xl sm:text-7xl px-4 mb-10 text-white'>
         Simple Math
       </h1>

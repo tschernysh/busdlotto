@@ -35,7 +35,7 @@ export const MainTitle = () => {
   }, []);
 
   return (
-    <div ref={mainTitleRef} className={`max-w-screen-mmx sm:pt-0 pt-56 sm:px-0 px-4 ${isVisible && 'block__visible_left'} mx-auto after__block_line`}>
+    <div ref={mainTitleRef} className={`max-w-screen-mmx sm:pt-0 pt-56 sm:px-0  px-4 ${isVisible ? 'block__visible_left' : 'opacity-0'} mx-auto after__block_line`}>
       <h1 className='font-inter800 text-5xl sm:text-c text-title   flex flex-col '>
         <span className='leading-[1.1em] block mt-14'>Win up to </span>
         <span className='leading-[1.1em] text-gold'>100K USDT</span>

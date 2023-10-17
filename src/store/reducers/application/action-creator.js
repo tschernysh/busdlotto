@@ -94,7 +94,7 @@ export const ApplicationActionCreator = {
 
       const lastWinners = res.wonDrawns?.map(el => {
         let newAmount = el.amount.toString()
-        newAmount = +web3.utils.fromWei(newAmount, 'ether')
+        newAmount = +el.amount / 10e5
 
         return { wallet: el.winner, time: +el.blockTimestamp, amount: newAmount }
 
@@ -329,6 +329,18 @@ export const ApplicationActionCreator = {
             text: <>User rejected the request.</>,
             description: <>Transaction error</>
           }))
+        } else if (error.code === 432) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>Transaction was not mined within 50+ blocks</p>
+              <p>However, be aware that it might still be mined!</p>
+              <br />
+              <p>
+                <a className='text-gold underline' href={Config().BSC_SCAN_URL + error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0].replace('Transaction Hash: ', '')}>{error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0]}</a>
+              </p>
+            </>,
+            description: <>Transaction error</>
+          }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
             text: <>{error.message}</>,
@@ -404,9 +416,21 @@ export const ApplicationActionCreator = {
             text: <>User rejected the request.</>,
             description: <>Transaction error</>
           }))
+        } else if (error.code === 432) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>Transaction was not mined within 50+ blocks</p>
+              <p>However, be aware that it might still be mined!</p>
+              <br />
+              <p>
+                <a className='text-gold underline' href={Config().BSC_SCAN_URL + error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0].replace('Transaction Hash: ', '')}>{error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0]}</a>
+              </p>
+            </>,
+            description: <>Transaction error</>
+          }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
-            text: <>{error.data.message}</>,
+            text: <>{error.message}</>,
             description: <>Transaction error</>
           }))
         }
@@ -416,13 +440,17 @@ export const ApplicationActionCreator = {
 
       console.log(approveToken.transactionHash)
 
+      let blockNumber
+      let txBlock
 
       do {
         await sleep(2000)
-        console.log('hey')
-      } while (!approveToken.transactionHash)
-
-      await sleep(5000)
+        blockNumber = await web3.eth.getBlock()
+        blockNumber = Number(blockNumber.number)
+        txBlock = Number(approveToken.blockNumber)
+      } while (
+        blockNumber - txBlock < Config().CONFIRM_BLOCK
+      )
 
       let depositTxn
       const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral || 0).encodeABI()
@@ -440,9 +468,21 @@ export const ApplicationActionCreator = {
             text: <>User rejected the request.</>,
             description: <>Transaction error</>
           }))
+        } else if (error.code === 432) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>Transaction was not mined within 50+ blocks</p>
+              <p>However, be aware that it might still be mined!</p>
+              <br />
+              <p>
+                <a className='text-gold underline' href={Config().BSC_SCAN_URL + error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0].replace('Transaction Hash: ', '')}>{error?.message.match(/Transaction Hash: 0x[0-9a-fA-F]+/)[0]}</a>
+              </p>
+            </>,
+            description: <>Transaction error</>
+          }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
-            text: <>{error.data.message}</>,
+            text: <>{error.message}</>,
             description: <>Transaction error</>
           }))
         }

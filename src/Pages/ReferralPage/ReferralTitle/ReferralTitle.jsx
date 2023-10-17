@@ -84,7 +84,7 @@ export const ReferralTitle = () => {
   }
 
   return (
-    <div ref={referralTitleRef} className={`max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} px-4 sm:px-0 pt-48 sm:pt-0`}>
+    <div ref={referralTitleRef} className={`max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_left' : 'opacity-0'} px-4 sm:px-0 pt-48 sm:pt-0`}>
       <h1 className='font-inter800 w-full sm:w-1/2 text-5xl sm:text-c text-title flex flex-col '>
         <span className='leading-[1.1em] block mt-14'>Referral</span>
         <span className='leading-[1.1em] '>Program</span>
@@ -95,7 +95,7 @@ export const ReferralTitle = () => {
       <div className='flex items-center mb-16 h-full gap-x-4'>
         <Button className='' disabled={showLink} onClick={copyReferralUrlToClipboard}>{showLink ? `${isMobile ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-6)}` : walletAddress}` : 'View Referral Link'}</Button>
         {
-          showLink && <div onClick={copyReferralUrlToClipboard} className='bg-gold cursor-pointer h-full rounded-xl p-4 sm:p-5'>
+          showLink && <div onClick={copyReferralUrlToClipboard} className='bg-gold cursor-pointer button__focus h-full rounded-xl p-4 sm:p-5'>
             <Copy className='sm:w-8 sm:h-8 w-4 h-4' />
           </div>
         }

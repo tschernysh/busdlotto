@@ -92,7 +92,7 @@ export const ReferralBonuses = () => {
   }, [referralCurrentPage])
 
   return (
-    <div ref={referralBonusesRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_right'} `}>
+    <div ref={referralBonusesRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_bot' : 'opacity-0'} `}>
       <h1 className='font-inter800 text-5xl sm:text-7xl px-4 sm:px-0 mb-24 text-white'>
         Check your referral bonuses
       </h1>

@@ -3,12 +3,29 @@ import { useEffect, useRef, useState } from "react";
 
 export const ReferralBenefits = () => {
 
-  const referralBenefitsRef = useRef()
-  const [isVisible, setIsVisible] = useState(false);
+  const referralBenefitsRef1 = useRef()
+  const referralBenefitsRef2 = useRef()
+  const referralBenefitsRef3 = useRef()
 
-  const handleIntersection = (entries) => {
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+  const [isVisible3, setIsVisible3] = useState(false);
+
+  const handleIntersection1 = (entries) => {
     if (entries[0].isIntersecting) {
-      setIsVisible(true);
+      setIsVisible1(true);
+    }
+  };
+
+  const handleIntersection2 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible2(true);
+    }
+  };
+
+  const handleIntersection3 = (entries) => {
+    if (entries[0].isIntersecting) {
+      setIsVisible3(true);
     }
   };
 
@@ -19,20 +36,45 @@ export const ReferralBenefits = () => {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersection, options);
-    if (referralBenefitsRef.current) {
-      observer.observe(referralBenefitsRef.current);
+    const observer = new IntersectionObserver(handleIntersection1, options);
+    if (referralBenefitsRef1.current) {
+      observer.observe(referralBenefitsRef1.current);
     }
 
     return () => {
-      if (referralBenefitsRef.current) {
-        observer.unobserve(referralBenefitsRef.current);
+      if (referralBenefitsRef1.current) {
+        observer.unobserve(referralBenefitsRef1.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection2, options);
+    if (referralBenefitsRef2.current) {
+      observer.observe(referralBenefitsRef2.current);
+    }
+
+    return () => {
+      if (referralBenefitsRef2.current) {
+        observer.unobserve(referralBenefitsRef2.current);
+      }
+    };
+  }, []);
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection3, options);
+    if (referralBenefitsRef3.current) {
+      observer.observe(referralBenefitsRef3.current);
+    }
+
+    return () => {
+      if (referralBenefitsRef3.current) {
+        observer.unobserve(referralBenefitsRef3.current);
       }
     };
   }, []);
 
   return (
-    <div ref={referralBenefitsRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} `}>
+    <div className={`mt-20 max-w-screen-mmx mx-auto `}>
       <div className='px-4 sm:px-0'>
         <h1 className='font-inter800 text-5xl sm:text-7xl mb-5 text-right sm:mb-24 text-white'>
           Experience the benefits
@@ -44,7 +86,7 @@ export const ReferralBenefits = () => {
         </p>
       </div>
       <div className='flex flex-col gap-y-24 sm:gap-y-10'>
-        <div className='fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2'>
+        <div ref={referralBenefitsRef1} className={`${isVisible1 ? 'block__visible_right' : 'opacity-0'} fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2`}>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
             sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28  flex items-center 
@@ -54,7 +96,7 @@ export const ReferralBenefits = () => {
             you will <span className='text-gold font-poppins600'>earn 1 USDT</span> for each lottery ticket they purchase.
           </p>
         </div>
-        <div className='fade__block_right self-end relative  sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2'>
+        <div ref={referralBenefitsRef2} className={`fade__block_right self-end relative  sm:py-16 sm:pl-32 sm:pr-10 ${isVisible2 ? 'block__visible_left' : 'opacity-0'} pl-4 pr-4 pt-20 pb-8 w-full sm:w-1/2`}>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
             sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28 flex items-center 
@@ -64,7 +106,7 @@ export const ReferralBenefits = () => {
             registered under you (second line), you will <span className='text-gold font-poppins600'>earn an additional 1 USDT</span> for each lottery ticket they purchase.
           </p>
         </div>
-        <div className='fade__block_right relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-16 pb-8 w-full sm:w-1/2'>
+        <div ref={referralBenefitsRef3} className={`fade__block_right ${isVisible3 ? 'block__visible_right' : 'opacity-0'} relative sm:py-16 sm:pl-32 sm:pr-10  pl-4 pr-4 pt-16 pb-8 w-full sm:w-1/2`}>
           <div className='absolute left-1/2 sm:left-0 top-0 sm:top-1/2 
             sm:text-5xl text-gold font-poppins600
             work__circles sm:w-44 sm:h-44 w-28 text-3xl h-28 flex items-center 

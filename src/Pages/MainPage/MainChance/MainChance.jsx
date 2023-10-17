@@ -17,7 +17,7 @@ const carouselOptions = {
   infiniteLoop: true,
   showThumbs: false,
   showStatus: false,
-  selectedItem: 1,
+  selectedItem: 0,
   centerSlidePercentage: 100,
 }
 
@@ -61,8 +61,9 @@ export const MainChance = () => {
   }, []);
 
   const { currentTicketIndex } = useSelector(state => state.applicationReducer)
+
   return (
-    <div ref={mainChanceRef} className={`mx-auto ${isVisible && 'block__visible_right'} after__block_line mt-20`}>
+    <div ref={mainChanceRef} className={`mx-auto ${isVisible ? 'block__visible_bot' : 'opacity-0'} after__block_line mt-20`}>
       <h1 className='text-5xl sm:text-7xl font-inter800 text-white mb-8 text-center'>Next chance to win!</h1>
       <Carousel className='landing__main__carousel' {...carouselOptions}>
         {tickets.map(el => <Ticket {...el} currentTicketIndex={currentTicketIndex} />)}

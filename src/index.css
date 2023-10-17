@@ -208,6 +208,37 @@
   .block__visible_left {
     animation: fadeLeft 1s 1 ease;
   }
+  .block__visible_top {
+    animation: fadeTop 1s 1 ease;
+  }
+  .block__visible_bot {
+    animation: fadeBot 1s 1 ease;
+  }
+
+}
+
+@keyframes fadeTop{
+  from{
+    opacity: 0;
+    transform: translate(0, -100%);
+  }
+  to{
+
+  opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeBot{
+  from{
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+  to{
+
+  opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes fadeRight{

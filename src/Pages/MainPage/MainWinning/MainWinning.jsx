@@ -10,12 +10,23 @@ import { useEffect, useRef, useState } from "react"
 export const MainWinning = () => {
 
   const { lastWinnings } = useSelector(state => state.applicationReducer)
-  const mainWinningRef = useRef()
-  const [isVisible, setIsVisible] = useState(false);
+  const mainWinningRef1 = useRef()
+  const mainWinningRef2 = useRef()
+  const mainWinningRef3 = useRef()
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+  const [isVisible3, setIsVisible3] = useState(false);
 
   const handleIntersection = (entries) => {
+    console.log(entries)
     if (entries[0].isIntersecting) {
-      setIsVisible(true);
+      setIsVisible1(true);
+    }
+    if (entries[1]?.isIntersecting) {
+      setIsVisible2(true);
+    }
+    if (entries[2]?.isIntersecting) {
+      setIsVisible3(true);
     }
   };
 
@@ -27,41 +38,54 @@ export const MainWinning = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, options);
-    if (mainWinningRef.current) {
-      observer.observe(mainWinningRef.current);
+    if (mainWinningRef1.current) {
+      observer.observe(mainWinningRef1.current);
+    }
+    if (mainWinningRef2.current) {
+      observer.observe(mainWinningRef2.current);
+    }
+    if (mainWinningRef3.current) {
+      observer.observe(mainWinningRef3.current);
     }
 
+
     return () => {
-      if (mainWinningRef.current) {
-        observer.unobserve(mainWinningRef.current);
+      if (mainWinningRef1.current) {
+        observer.unobserve(mainWinningRef1.current);
+      }
+      if (mainWinningRef2.current) {
+        observer.unobserve(mainWinningRef2.current);
+      }
+      if (mainWinningRef3.current) {
+        observer.unobserve(mainWinningRef3.current);
       }
     };
   }, []);
 
   return (
-    <div ref={mainWinningRef} className={`max-w-screen-mmx mx-auto ${isVisible && 'block__visible_left'} after__block_line mt-20`}>
+    <div className={`max-w-screen-mmx mx-auto  after__block_line mt-20`}>
       <h1 className='text-4xl sm:text-7xl px-4 sm:px-0 font-inter800 text-white mb-8'>Winning wallets</h1>
       <p className='font-poppins400 text-description px-4 sm:px-0 text-3xl sm:text-4xl mb-16'>
         Yours can be here as well!
         Want to see if you have received your prize?
         Check the transactions <a href={
-          `${Config().BSC_SCAN_URL.replace('/tx/', '/address/')}${Config().CHAIN_LOTTO_CONTRACT_ADDRESS}#events`
+          `${Config().BSC_SCAN_URL.replace('/tx/', '/address/')}${Config().CHAIN_LOTTO_CONTRACT_ADDRESS}`
         } target='_blank' className='text-gold font-poppins600'>here.</a>
       </p>
       <div className='flex gap-x-8 items-center mb-16 w-full overflow-x-auto'>
-        <div className='flex flex-col relative gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
+        <div ref={mainWinningRef1} className={`flex flex-col relative ${isVisible1 ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
           <img src={Map1} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
             return <WinningTile value={formatNumber(el.amount) + ' USDT'} />
           })}
         </div>
-        <div className='flex flex-col relative gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
+        <div ref={mainWinningRef2} className={`flex flex-col relative ${isVisible2 ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
           <img src={Map2} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
             return <WinningTile value={new Date(el.time * 1000).toLocaleTimeString()} />
           })}
         </div>
-        <div className='flex flex-col relative gap-y-12 winning__block_border w-full sm:px-0 px-4 pt-5'>
+        <div ref={mainWinningRef3} className={`flex flex-col relative ${isVisible3 ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
           <img src={Map3} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
             return <WinningTile value={el.wallet.slice(0, 4) + '...' + el.wallet.slice(-4)} />
