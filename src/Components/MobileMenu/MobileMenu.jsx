@@ -32,27 +32,27 @@ export const MobileMenu = (props) => {
       </div>
       <div className='flex flex-col sm:flex-row gap-y-8 items-center mx-auto justify-between max-w-screen-mmx'>
         <div className='flex items-center gap-x-8'>
-          <a href='https://instagram.com' target='_blank' className=''>
+          <a href='https://www.instagram.com/chain_lotto/' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
               <Instagram />
             </div>
           </a>
-          <a href='https://instagram.com' target='_blank' className=''>
+          <a href='https://twitter.com/chain_lotto' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
               <Twitter />
             </div>
           </a>
-          <a href='https://instagram.com' target='_blank' className=''>
+          <a href='https://t.me/chainlotto_chat' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
               <Telegram />
             </div>
           </a>
-          <a href='https://instagram.com' target='_blank' className=''>
+          <a href='https://t.me/chainlotto' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
               <Telegram />
             </div>
           </a>
-          <a href='https://instagram.com' target='_blank' className=''>
+          <a href='https://www.youtube.com/@chainlotto' target='_blank' className=''>
             <div className='bg-blueDisabled rounded-xl px-2 py-2'>
               <Youtube />
             </div>
@@ -60,7 +60,7 @@ export const MobileMenu = (props) => {
         </div>
         <a
           className='text-description text-2xl sm:text-3xl font-poppins400'
-          href='https://support@chainlotto.io'
+          href='mailto:support@chainlotto.io'
           target='_blank'>support@chainlotto.io</a>
       </div>
     </div>

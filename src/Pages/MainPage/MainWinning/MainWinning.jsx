@@ -17,6 +17,8 @@ export const MainWinning = () => {
   const [isVisible2, setIsVisible2] = useState(false);
   const [isVisible3, setIsVisible3] = useState(false);
 
+  const isMobile = window.innerWidth < 640
+
   const handleIntersection = (entries) => {
     console.log(entries)
     if (entries[0].isIntersecting) {
@@ -79,13 +81,13 @@ export const MainWinning = () => {
             return <WinningTile value={formatNumber(el.amount) + ' USDT'} />
           })}
         </div>
-        <div ref={mainWinningRef2} className={`flex flex-col relative ${isVisible2 ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
+        <div ref={mainWinningRef2} className={`flex flex-col relative ${isVisible2 || isMobile ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
           <img src={Map2} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
             return <WinningTile value={new Date(el.time * 1000).toLocaleTimeString()} />
           })}
         </div>
-        <div ref={mainWinningRef3} className={`flex flex-col relative ${isVisible3 ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
+        <div ref={mainWinningRef3} className={`flex flex-col relative ${isVisible3 || isMobile ? 'block__visible_bot' : 'opacity-0'} gap-y-12 winning__block_border w-full sm:px-0 px-4 py-5`}>
           <img src={Map3} className='w-full h-full absolute top-0 left-0 filter brightness-20' />
           {lastWinnings.map(el => {
             return <WinningTile value={el.wallet.slice(0, 4) + '...' + el.wallet.slice(-4)} />

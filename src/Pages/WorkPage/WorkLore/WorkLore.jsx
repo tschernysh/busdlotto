@@ -39,7 +39,7 @@ export const WorkLore = () => {
 
   return isMobile
     ? (
-      <div ref={workLoreRef} className={`mt-20 max-w-screen-mmx mx-auto ${isVisible ? 'block__visible_left' : 'opacity-0'} `}>
+      <div ref={workLoreRef} className={`mt-20 max-w-screen-mmx mx-auto block__visible_left`}>
         <div className='fade__block_right p-10 flex flex-col gap-y-8 mb-10'>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 20 tickets have been bought, <span className='text-gold font-poppins600'>40 USDT</span> are drawn.</p>
           <p className='text-description font-poppins400 sm:text-3xl text-2xl'>Once 100 tickets have been bought, <span className='text-gold font-poppins600'>100 USDT</span> are drawn.</p>
