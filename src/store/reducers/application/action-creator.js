@@ -147,25 +147,21 @@ export const ApplicationActionCreator = {
     () => async (dispatch, store) => {
 
       const walletRPC = store().applicationReducer.walletRPC
-      const web3 = await initWeb3(walletRPC)
+      const web3 = new Web3(Config().WEB3_BSC_URL)
       const walletAddress = store().applicationReducer.walletAddress
 
       const tokenContract = new web3.eth.Contract(ERC20.abi, Config().TOKEN_CONTRACT_ADDRESS)
 
 
       let tokenBalance
-
-
-
       try {
-        tokenBalance = await tokenContract.methods.balanceOf(walletAddress).call()
+        tokenBalance = await tokenContract.methods.balanceOf(walletAddress).call({ from: walletAddress })
         tokenBalance = tokenBalance.toString()
         tokenBalance = tokenBalance / 10e5
       } catch (error) {
         console.log(error)
         return
       }
-
       dispatch(ApplicationActionCreator.setTokenBalance(tokenBalance))
 
     },
@@ -438,7 +434,6 @@ export const ApplicationActionCreator = {
         return
       }
 
-      console.log(approveToken.transactionHash)
 
       let blockNumber
       let txBlock
@@ -453,7 +448,9 @@ export const ApplicationActionCreator = {
       )
 
       let depositTxn
-      const buyData = chainLottoContract.methods.buyTicket(amount, currentReferral || 0).encodeABI()
+
+      const referral = currentReferral || 0
+      const buyData = chainLottoContract.methods.buyTicket(amount, referral).encodeABI()
       try {
         depositTxn = await web3.eth.sendTransaction({
           from: walletAddress,
