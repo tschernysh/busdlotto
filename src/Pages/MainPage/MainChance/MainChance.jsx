@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { formatNumber } from 'utils/formatNumber';
 import { ReactComponent as Loader } from 'Assets/loader.svg'
 import { Button } from 'Components/Button/Button';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const carouselOptions = {
   autoPlay: false,
@@ -35,17 +35,17 @@ export const MainChance = () => {
   const mainChanceRef = useRef()
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleIntersection = (entries) => {
+  const handleIntersection = useCallback((entries) => {
     if (entries[0].isIntersecting) {
       setIsVisible(true);
     }
-  };
+  }, [])
 
-  const options = {
+  const options = useMemo(() => ({
     root: null,
     rootMargin: '0px',
     threshold: 0.5, // Adjust this threshold as needed
-  };
+  }), [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, options);

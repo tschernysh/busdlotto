@@ -7,7 +7,7 @@ import { useAccount, useSwitchNetwork, useWalletClient } from "wagmi"
 import { useDispatch, useSelector } from "react-redux"
 import { AccountActionCreator } from "store/reducers/account/action-creator"
 import { ApplicationActionCreator } from "store/reducers/application/action-creator"
-import { useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { Web3Modal } from "@web3modal/react"
 import { Config } from "config"
 
@@ -20,22 +20,18 @@ export const ApplicationRoutes = (props) => {
   const { notCorrectChain, walletAddress, walletRPC } = useSelector(state => state.applicationReducer)
   const dispatch = useDispatch()
 
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     dispatch(AccountActionCreator.resetUserInfo())
     dispatch(ApplicationActionCreator.setWalletAddress(null))
-  }
+  }, [])
 
   useEffect(() => {
-    console.log(notCorrectChain)
     if (notCorrectChain) {
-      console.log('change')
       switchNetwork?.(Config().CHAIN_ID)
     }
   }, [notCorrectChain, address, walletRPC])
 
-
   useEffect(() => {
-    console.log(address, data)
     if (!!data && !isDisconnected) {
       dispatch(ApplicationActionCreator.setWeb3(data))
       dispatch(ApplicationActionCreator.connectConnectWallet())
@@ -44,26 +40,29 @@ export const ApplicationRoutes = (props) => {
     }
   }, [address, data])
 
-
   useEffect(() => {
     if (isDisconnected) {
       disconnectWallet()
     }
   }, [isDisconnected])
 
-  return (
-    <>
-      <Web3Modal explorerRecommendedWalletIds={[
-        'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-        '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-      ]} projectId={props.projectId} ethereumClient={props.ethereumClient} />
+  const Content = useMemo(() => {
+    return (
+      <>
+        <Web3Modal explorerRecommendedWalletIds={[
+          'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+          '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+        ]} projectId={props.projectId} ethereumClient={props.ethereumClient} />
 
-      <Routes>
-        <Route path='/works' element={<WorkPage />} />
-        <Route path='/referral' element={<ReferralPage />} />
-        <Route path='/results' element={<ResultsPage />} />
-        <Route path='/:ref?' element={<MainPage />} />
-      </Routes>
-    </>
-  )
+        <Routes>
+          <Route path='/works' element={<WorkPage />} />
+          <Route path='/referral' element={<ReferralPage />} />
+          <Route path='/results' element={<ResultsPage />} />
+          <Route path='/:ref?' element={<MainPage />} />
+        </Routes>
+      </>
+    )
+  }, [props.projectId, props.ethereumClient])
+
+  return Content
 }

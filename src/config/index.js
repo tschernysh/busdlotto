@@ -6,7 +6,7 @@ export const Config = () => {
       TOKEN_CONTRACT_ADDRESS: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
       CHAIN_LOTTO_CONTRACT_ADDRESS: '0xA4e2CdCA8E33D2b27B5Bdf8Ea74E45Fc6Ecc5574',
       THEGRAPH_URL: 'https://api.thegraph.com/subgraphs/name/ditechdev/chainlotto',
-      HEARTBEAT_RATE: 20,
+      HEARTBEAT_RATE: 5,
       BASE_URL: 'https://chainlotto.io/#/',
       PROJECT_ID: '72132f1d42652af54fbe2dd3353049cb',
       CHAIN_ID: 137,

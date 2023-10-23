@@ -5,7 +5,7 @@ import { Header } from 'Components/Header/Header';
 import { Footer } from 'Components/Footer/Footer';
 import { ApplicationRoutes } from 'Routes/ApplicationRoutes';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { initWagmi } from 'utils/initWagmi';
 import { WagmiConfig } from 'wagmi';
 import { ApplicationActionCreator } from 'store/reducers/application/action-creator';
@@ -29,6 +29,7 @@ function App() {
   const [buyModalShow, setBuyModalShow] = useState(false)
   const [boughtModalShow, setBoughtModalShow] = useState(false)
   const [isMenu, setIsMenu] = useState(false)
+  const intervalRef = useRef(null)
 
 
   useMemo(() => {
@@ -54,13 +55,11 @@ function App() {
     }
   }, [walletAddress])
 
-
-
-  useEffect(() => {
-    let interval
-    interval = setInterval(() => {
+  const createInterval = useCallback(() => {
+    intervalRef.current = setInterval(() => {
       if (!seconds) {
         if (notCorrectChain) return
+        console.log(notCorrectChain, walletAddress)
         dispatch(ApplicationActionCreator.getLastWinners())
         dispatch(ApplicationActionCreator.getCurrentTicketIndex())
         if (walletAddress) {
@@ -77,9 +76,18 @@ function App() {
         setSeconds(0)
       } else setSeconds(seconds + 1)
     }, 1000)
+  }, [notCorrectChain, walletAddress, seconds])
 
-    return () => clearInterval(interval);
-  }, [seconds])
+  useEffect(() => {
+    if (intervalRef?.current) {
+      clearInterval(intervalRef?.current)
+    }
+
+    createInterval()
+
+    return () => clearInterval(intervalRef?.current);
+
+  }, [createInterval])
 
   useEffect(() => {
     if (isNeedToUpdate) {
@@ -144,9 +152,9 @@ function App() {
     };
   }, []);
 
-  const setToastData = (data) => {
+  const setToastData = useCallback((data) => {
     dispatch(ApplicationActionCreator.setToastData(data))
-  }
+  }, [])
 
   return (
     <ConfigContext.Provider value={{ buyModalShow, setBuyModalShow, boughtModalShow, setBoughtModalShow }}>

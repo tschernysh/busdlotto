@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { ReactComponent as Arrow } from 'Assets/arrow.svg'
 import { ReactComponent as ArrowDown } from 'Assets/downArrow.svg'
 import { isVisible } from "@testing-library/user-event/dist/utils"
@@ -50,17 +50,17 @@ export const MainFaq = () => {
   const mainFaqRef = useRef()
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleIntersection = (entries) => {
+  const handleIntersection = useCallback((entries) => {
     if (entries[0].isIntersecting) {
       setIsVisible(true);
     }
-  };
+  }, [])
 
-  const options = {
+  const options = useMemo(() => ({
     root: null,
     rootMargin: '0px',
     threshold: 0.5, // Adjust this threshold as needed
-  };
+  }), [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, options);
