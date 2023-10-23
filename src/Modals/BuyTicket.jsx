@@ -49,10 +49,13 @@ export const BuyTicket = () => {
             </span>
           </div>
         </div>
-        <p className='text-base text-description font-poppins400 mb-10'>
+        <p className='text-base text-description font-poppins400 mb-5'>
           By clicking the button below, you can purchase a lottery ticket worth 10 USD.
           There is no limit to how many tickets can be bought.
           If you win, you can claim your rewards in the "Check Your Results" section.
+        </p>
+        <p className='text-base text-gold sm:hidden font-poppins400 mb-10'>
+          In case your Android device is rejected, please redo the purchase from your computer!
         </p>
         <Button className={`${isDepositTransaction && 'px-4 py-2'}`} disabled={isDepositTransaction} onClick={handleBuyTickets}>
           {

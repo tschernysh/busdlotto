@@ -337,6 +337,13 @@ export const ApplicationActionCreator = {
             </>,
             description: <>Transaction error</>
           }))
+        } else if (error.code === -32603) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>You don't have enough GAS in your wallet to pay for the transaction fees.</p>
+            </>,
+            description: <>Please top it up!</>
+          }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
             text: <>{error.message}</>,
@@ -424,6 +431,13 @@ export const ApplicationActionCreator = {
             </>,
             description: <>Transaction error</>
           }))
+        } else if (error.code === -32603) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>You don't have enough GAS in your wallet to pay for the transaction fees.</p>
+            </>,
+            description: <>Please top it up!</>
+          }))
         } else {
           dispatch(ApplicationActionCreator.setToastData({
             text: <>{error.message}</>,
@@ -464,6 +478,13 @@ export const ApplicationActionCreator = {
           dispatch(ApplicationActionCreator.setToastData({
             text: <>User rejected the request.</>,
             description: <>Transaction error</>
+          }))
+        } else if (error.code === -32603) {
+          dispatch(ApplicationActionCreator.setToastData({
+            text: <>
+              <p>You don't have enough GAS in your wallet to pay for the transaction fees.</p>
+            </>,
+            description: <>Please top it up!</>
           }))
         } else if (error.code === 432) {
           dispatch(ApplicationActionCreator.setToastData({
