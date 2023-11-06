@@ -46,10 +46,11 @@ export const WorkLore = () => {
           <span className='text-gold font-poppins600'> 40 USDT, 100 USDT, 1 000 USDT, 10 000 USDT </span>, and even <span className='text-gold font-poppins600'>100 000 USDT</span>.
           Isn't this better than a dream? And the more tickets you have,
           the higher your chances of winning. It's even possible to win multiple prizes!</p>
-        <p className='font-poppins400 text-xl text-description'>To claim your winnings, simply connect your wallet,
-          click on the "Check Your Results" section, and press the
-          "Get your reward now!" button.
-          Please note that a small gas fee in BNB is required for the transaction.</p>
+        <p className='font-poppins400 text-xl text-description'>
+          To claim your winnings, connect your wallet, go to the 'Check Your Results' page,
+          and click the 'Get Your Reward Now!' button.
+          Please be aware that a small gas fee is required for the transaction
+        </p>
       </div>
       <div className='text-center w-full px-4 sm:px-0'>
         <Button onClick={() => setBuyModalShow(true)} >BUY TICKET</Button>
@@ -69,10 +70,11 @@ export const WorkLore = () => {
               <span className='text-gold font-poppins600'> 40 USDT, 100 USDT, 1 000 USDT, 10 000 USDT </span>, and even <span className='text-gold font-poppins600'>100 000 USDT</span>.
               Isn't this better than a dream? And the more tickets you have,
               the higher your chances of winning. It's even possible to win multiple prizes!</p>
-            <p className='font-poppins400 text-xl text-description'>To claim your winnings, simply connect your wallet,
-              click on the "Check Your Results" section, and press the
-              "Get your reward now!" button.
-              Please note that a small gas fee in BNB is required for the transaction.</p>
+            <p className='font-poppins400 text-xl text-description'>
+              To claim your winnings, connect your wallet, go to the 'Check Your Results' page,
+              and click the 'Get Your Reward Now!' button.
+              Please be aware that a small gas fee is required for the transaction
+            </p>
           </div>
           <div className='text-center w-full px-4 sm:px-0'>
             <Button onClick={() => setBuyModalShow.bind(null, true)} >BUY TICKET</Button>
